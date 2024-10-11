@@ -1,5 +1,8 @@
 extends Control
+#onready vars load nodes at the very beginning and make sure they are available at any time
+@onready var http_request = %HTTPRequest
 
+var url = 'http://127.0.0.1:5000/analyze'
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -26,4 +29,16 @@ func _on_file_dialog_file_selected(path: String) -> void:
 	#Making the API call, it needs to treat the image as a file to make the proper transformation, that's why it's separete from the other code
 	var file = FileAccess.open(path, FileAccess.READ)
 	var base_64_data = Marshalls.raw_to_base64(file.get_buffer(file.get_length()))
-	print(base_64_data)
+	var body = JSON.new().stringify({
+		"img_path": str('data:image/jpeg;base64,',base_64_data),
+		"actions": ["age", "gender", "emotion", "race"]
+		})
+	var headers: PackedStringArray = ['Content-type:application/json']
+	http_request.request(url, headers, HTTPClient.METHOD_POST, body)
+
+
+func _on_http_request_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray) -> void:
+	var json = JSON.new()
+	json.parse(body.get_string_from_utf8())
+	var response = json.get_data()
+	print(response)

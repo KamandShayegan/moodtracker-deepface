@@ -46,6 +46,9 @@ theme_override_constants/margin_bottom = 50
 layout_mode = 2
 text = "Load Image"
 
+[node name="HTTPRequest" type="HTTPRequest" parent="MarginContainer/LoadImageButton"]
+unique_name_in_owner = true
+
 [node name="Image" type="TextureRect" parent="."]
 unique_name_in_owner = true
 layout_mode = 1
@@ -65,3 +68,4 @@ stretch_mode = 5
 
 [connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]
 [connection signal="button_up" from="MarginContainer/LoadImageButton" to="." method="_on_load_image_button_up"]
+[connection signal="request_completed" from="MarginContainer/LoadImageButton/HTTPRequest" to="." method="_on_http_request_request_completed"]
