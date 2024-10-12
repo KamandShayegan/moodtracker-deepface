@@ -17,9 +17,24 @@ extends Control
 var url = 'http://127.0.0.1:5000/'
 var api_functions = ['analyze','verify']
 
+var de1_target_value: float = 0
+var de2_target_value: float = 0
+var de3_target_value: float = 0
+var de4_target_value: float = 0
+
+# This function is called when each frame is drawn, useful for making anything move, in our case the progress bars
+func _process(delta: float) -> void:
+	dominant_emotion_1.value = lerp(dominant_emotion_1.value, de1_target_value, delta * 2.2)
+	dominant_emotion_2.value = lerp(dominant_emotion_2.value, de2_target_value, delta * 2.2)
+	dominant_emotion_3.value = lerp(dominant_emotion_3.value, de3_target_value, delta * 2.2)
+	dominant_emotion_4.value = lerp(dominant_emotion_4.value, de4_target_value, delta * 2.2)
+
 # This function is connected to the button up event of the LoadImageButton
 func _on_load_image_button_up() -> void:
-	print('Loading image')
+	de1_target_value = 0
+	de2_target_value = 0
+	de3_target_value = 0
+	de4_target_value = 0
 	%FileDialog.popup()
 
 # The button shows a file-system popup, when a file is selected, this function is called
@@ -48,7 +63,6 @@ func _on_http_request_request_completed(result: int, response_code: int, headers
 	var json = JSON.new()
 	json.parse(body.get_string_from_utf8())
 	var response = json.get_data()
-	print(response['results'][0])
 
 	# We set the values to the labels
 	age_value.text = str(response['results'][0]['age'])
@@ -63,13 +77,12 @@ func _on_http_request_request_completed(result: int, response_code: int, headers
 	var emotion_value_pairs: Array = []
 	for k: String in keys:
 		emotion_value_pairs.append([k,emotions[k]])
-	print('Emotion value pairs: ',emotion_value_pairs)
 	# Set the values to the progress bars and labels
-	dominant_emotion_1.value = emotion_value_pairs[0][1]
+	de1_target_value = emotion_value_pairs[0][1]
 	emotion_label_1.text = emotion_value_pairs[0][0]
-	dominant_emotion_2.value = emotion_value_pairs[1][1]
+	de2_target_value = emotion_value_pairs[1][1]
 	emotion_label_2.text = emotion_value_pairs[1][0]
-	dominant_emotion_3.value = emotion_value_pairs[2][1]
+	de3_target_value = emotion_value_pairs[2][1]
 	emotion_label_3.text = emotion_value_pairs[2][0]
-	dominant_emotion_4.value = emotion_value_pairs[3][1]
+	de4_target_value = emotion_value_pairs[3][1]
 	emotion_label_4.text = emotion_value_pairs[3][0]
