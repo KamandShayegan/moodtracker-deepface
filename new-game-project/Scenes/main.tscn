@@ -15,10 +15,10 @@ corner_radius_bottom_left = 7
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_le7wl"]
 bg_color = Color(0.252028, 0.252028, 0.252028, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_la1p0"]
 bg_color = Color(0.733333, 0, 0.239216, 0)
@@ -135,7 +135,7 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_le7wl")
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/HBoxContainer/PanelContainer"]
-custom_minimum_size = Vector2(170, 0)
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 30
