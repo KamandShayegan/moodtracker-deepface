@@ -74,29 +74,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -69.0
-offset_top = -101.0
-offset_right = 69.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_constants/margin_bottom = 70
-
-[node name="LoadImageButton" type="Button" parent="MarginContainer"]
-layout_mode = 2
-theme = ExtResource("2_kbyar")
-theme_override_fonts/font = ExtResource("2_j3cr5")
-text = "Load Image"
-
-[node name="HTTPRequest" type="HTTPRequest" parent="MarginContainer/LoadImageButton"]
-unique_name_in_owner = true
-
 [node name="Panel" type="PanelContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
@@ -130,11 +107,14 @@ size_flags_horizontal = 3
 expand_mode = 3
 stretch_mode = 5
 
-[node name="PanelContainer" type="PanelContainer" parent="Panel/MarginContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_le7wl")
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/HBoxContainer/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_constants/margin_left = 10
@@ -142,61 +122,61 @@ theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 30
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Panel/MarginContainer/HBoxContainer/PanelContainer/MarginContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 40
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer2"]
 layout_mode = 2
 
-[node name="AgeLabels" type="HBoxContainer" parent="Panel/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer"]
+[node name="AgeLabels" type="HBoxContainer" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer"]
 layout_mode = 2
 
-[node name="Age" type="Label" parent="Panel/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer/AgeLabels"]
+[node name="Age" type="Label" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer/AgeLabels"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_j3cr5")
 text = "Age: "
 
-[node name="AgeValue" type="Label" parent="Panel/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer/AgeLabels"]
+[node name="AgeValue" type="Label" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer/AgeLabels"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_nh00n")
 
-[node name="GenderLabels" type="HBoxContainer" parent="Panel/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer"]
+[node name="GenderLabels" type="HBoxContainer" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer"]
 layout_mode = 2
 
-[node name="Gender" type="Label" parent="Panel/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer/GenderLabels"]
+[node name="Gender" type="Label" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer/GenderLabels"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_j3cr5")
 text = "Gender:"
 
-[node name="GenderValue" type="Label" parent="Panel/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer/GenderLabels"]
+[node name="GenderValue" type="Label" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer/GenderLabels"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_nh00n")
 
-[node name="RaceLabels" type="HBoxContainer" parent="Panel/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer"]
+[node name="RaceLabels" type="HBoxContainer" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer"]
 layout_mode = 2
 
-[node name="Race" type="Label" parent="Panel/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer/RaceLabels"]
+[node name="Race" type="Label" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer/RaceLabels"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_j3cr5")
 text = "Race:"
 
-[node name="RaceValue" type="Label" parent="Panel/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer/RaceLabels"]
+[node name="RaceValue" type="Label" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer/RaceLabels"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_nh00n")
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Panel/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer2"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer2"]
 layout_mode = 2
 
-[node name="Emotions" type="Label" parent="Panel/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer2"]
+[node name="Emotions" type="Label" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer2"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_j3cr5")
 text = "Emotions: "
 
-[node name="DominantEmotion1" type="ProgressBar" parent="Panel/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer2"]
+[node name="DominantEmotion1" type="ProgressBar" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer2"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 23)
 layout_mode = 2
@@ -205,7 +185,7 @@ theme_override_styles/background = SubResource("StyleBoxFlat_la1p0")
 theme_override_styles/fill = SubResource("StyleBoxFlat_w2y0h")
 show_percentage = false
 
-[node name="EmotionLabel1" type="Label" parent="Panel/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer2/DominantEmotion1"]
+[node name="EmotionLabel1" type="Label" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer2/DominantEmotion1"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 4
@@ -217,7 +197,7 @@ offset_bottom = 11.5
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("3_nh00n")
 
-[node name="DominantEmotion2" type="ProgressBar" parent="Panel/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer2"]
+[node name="DominantEmotion2" type="ProgressBar" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer2"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 23)
 layout_mode = 2
@@ -226,7 +206,7 @@ theme_override_styles/background = SubResource("StyleBoxFlat_la1p0")
 theme_override_styles/fill = SubResource("StyleBoxFlat_8cvc2")
 show_percentage = false
 
-[node name="EmotionLabel2" type="Label" parent="Panel/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer2/DominantEmotion2"]
+[node name="EmotionLabel2" type="Label" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer2/DominantEmotion2"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 4
@@ -238,7 +218,7 @@ offset_bottom = 11.5
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("3_nh00n")
 
-[node name="DominantEmotion3" type="ProgressBar" parent="Panel/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer2"]
+[node name="DominantEmotion3" type="ProgressBar" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer2"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 23)
 layout_mode = 2
@@ -247,7 +227,7 @@ theme_override_styles/background = SubResource("StyleBoxFlat_la1p0")
 theme_override_styles/fill = SubResource("StyleBoxFlat_qp4gv")
 show_percentage = false
 
-[node name="EmotionLabel3" type="Label" parent="Panel/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer2/DominantEmotion3"]
+[node name="EmotionLabel3" type="Label" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer2/DominantEmotion3"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 4
@@ -259,7 +239,7 @@ offset_bottom = 11.5
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("3_nh00n")
 
-[node name="DominantEmotion4" type="ProgressBar" parent="Panel/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer2"]
+[node name="DominantEmotion4" type="ProgressBar" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer2"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 23)
 layout_mode = 2
@@ -268,7 +248,7 @@ theme_override_styles/background = SubResource("StyleBoxFlat_la1p0")
 theme_override_styles/fill = SubResource("StyleBoxFlat_3rs6v")
 show_percentage = false
 
-[node name="EmotionLabel4" type="Label" parent="Panel/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer2/DominantEmotion4"]
+[node name="EmotionLabel4" type="Label" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer2/DominantEmotion4"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 4
@@ -280,9 +260,24 @@ offset_bottom = 11.5
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("3_nh00n")
 
-[node name="PanelContainer" type="PanelContainer" parent="Panel/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer2"]
+[node name="PanelContainer" type="PanelContainer" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer2"]
 layout_mode = 2
 
+[node name="PanelContainer2" type="PanelContainer" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer2"]
+layout_mode = 2
+
+[node name="LoadImageButton" type="Button" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer2/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("2_kbyar")
+theme_override_fonts/font = ExtResource("2_j3cr5")
+text = "Load Image"
+
+[node name="HTTPRequest" type="HTTPRequest" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer2/MarginContainer/LoadImageButton"]
+unique_name_in_owner = true
+
 [connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]
-[connection signal="button_up" from="MarginContainer/LoadImageButton" to="." method="_on_load_image_button_up"]
-[connection signal="request_completed" from="MarginContainer/LoadImageButton/HTTPRequest" to="." method="_on_http_request_request_completed"]
+[connection signal="button_up" from="Panel/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer2/MarginContainer/LoadImageButton" to="." method="_on_load_image_button_up"]
+[connection signal="request_completed" from="Panel/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer2/MarginContainer/LoadImageButton/HTTPRequest" to="." method="_on_http_request_request_completed"]
