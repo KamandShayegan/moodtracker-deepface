@@ -56,7 +56,8 @@ func _on_file_dialog_file_selected(path: String) -> void:
 	var base_64_data = Marshalls.raw_to_base64(image.save_jpg_to_buffer())
 	var body = JSON.new().stringify({
 		"img_path": str('data:image/jpeg;base64,',base_64_data),
-		"actions": ["age", "gender", "emotion", "race"]
+		"actions": ["age", "gender", "emotion", "race"],
+		"detector_backend": "opencv"
 		})
 	var headers: PackedStringArray = ['Content-type:application/json']
 	http_request.request(url+api_functions[0], headers, HTTPClient.METHOD_POST, body)
