@@ -42,14 +42,18 @@ func _on_file_dialog_file_selected(path: String) -> void:
 	#Setting the image texture
 	var image = Image.new()
 	image.load(path)
-	
+
+	# Image resizing for quicker api calls
+	var resize_factor = min((512.0 / float(image.get_height())), 1)
+	image.resize(image.get_width()*resize_factor, image.get_height()*resize_factor)
+
 	var image_texture = ImageTexture.new()
 	image_texture.set_image(image)
 	%Image.texture = image_texture
 	
 	#Making the API call. It needs to treat the image as a file to make the proper transformation, that's why it's separete from the other code
 	var file = FileAccess.open(path, FileAccess.READ)
-	var base_64_data = Marshalls.raw_to_base64(file.get_buffer(file.get_length()))
+	var base_64_data = Marshalls.raw_to_base64(image.save_jpg_to_buffer())
 	var body = JSON.new().stringify({
 		"img_path": str('data:image/jpeg;base64,',base_64_data),
 		"actions": ["age", "gender", "emotion", "race"]
