@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://lx54hc3a7w3o"]
+[gd_scene load_steps=13 format=3 uid="uid://lx54hc3a7w3o"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_032ey"]
 [ext_resource type="FontFile" uid="uid://yphs355qgbfo" path="res://Assets/Fonts/Poppins/Poppins-Bold.ttf" id="2_j3cr5"]
+[ext_resource type="Gradient" uid="uid://c8iv27q3usfg0" path="res://Resources/progress_bar_gradient.tres" id="2_jxe27"]
+[ext_resource type="Theme" uid="uid://jnx23qrh61nf" path="res://Resources/button_theme.tres" id="2_kbyar"]
 [ext_resource type="FontFile" uid="uid://4thlyosuh7vl" path="res://Assets/Fonts/Poppins/Poppins-Medium.ttf" id="3_nh00n"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1d2j2"]
@@ -11,8 +13,39 @@ corner_radius_top_right = 7
 corner_radius_bottom_right = 7
 corner_radius_bottom_left = 7
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_le7wl"]
+bg_color = Color(0.252028, 0.252028, 0.252028, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_la1p0"]
-bg_color = Color(1, 1, 1, 0)
+bg_color = Color(0.733333, 0, 0.239216, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w2y0h"]
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8cvc2"]
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qp4gv"]
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3rs6v"]
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -22,6 +55,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_032ey")
+progress_bar_gradient = ExtResource("2_jxe27")
 
 [node name="FileDialog" type="FileDialog" parent="."]
 unique_name_in_owner = true
@@ -56,6 +90,7 @@ theme_override_constants/margin_bottom = 70
 
 [node name="LoadImageButton" type="Button" parent="MarginContainer"]
 layout_mode = 2
+theme = ExtResource("2_kbyar")
 theme_override_fonts/font = ExtResource("2_j3cr5")
 text = "Load Image"
 
@@ -97,9 +132,10 @@ stretch_mode = 5
 
 [node name="PanelContainer" type="PanelContainer" parent="Panel/MarginContainer/HBoxContainer"]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_le7wl")
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/HBoxContainer/PanelContainer"]
-custom_minimum_size = Vector2(160, 0)
+custom_minimum_size = Vector2(170, 0)
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 30
@@ -145,7 +181,7 @@ layout_mode = 2
 [node name="Race" type="Label" parent="Panel/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer/RaceLabels"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_j3cr5")
-text = "Age: "
+text = "Race:"
 
 [node name="RaceValue" type="Label" parent="Panel/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer/RaceLabels"]
 unique_name_in_owner = true
@@ -166,6 +202,7 @@ custom_minimum_size = Vector2(0, 23)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_nh00n")
 theme_override_styles/background = SubResource("StyleBoxFlat_la1p0")
+theme_override_styles/fill = SubResource("StyleBoxFlat_w2y0h")
 show_percentage = false
 
 [node name="EmotionLabel1" type="Label" parent="Panel/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer2/DominantEmotion1"]
@@ -186,6 +223,7 @@ custom_minimum_size = Vector2(0, 23)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_nh00n")
 theme_override_styles/background = SubResource("StyleBoxFlat_la1p0")
+theme_override_styles/fill = SubResource("StyleBoxFlat_8cvc2")
 show_percentage = false
 
 [node name="EmotionLabel2" type="Label" parent="Panel/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer2/DominantEmotion2"]
@@ -206,6 +244,7 @@ custom_minimum_size = Vector2(0, 23)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_nh00n")
 theme_override_styles/background = SubResource("StyleBoxFlat_la1p0")
+theme_override_styles/fill = SubResource("StyleBoxFlat_qp4gv")
 show_percentage = false
 
 [node name="EmotionLabel3" type="Label" parent="Panel/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer2/DominantEmotion3"]
@@ -226,6 +265,7 @@ custom_minimum_size = Vector2(0, 23)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_nh00n")
 theme_override_styles/background = SubResource("StyleBoxFlat_la1p0")
+theme_override_styles/fill = SubResource("StyleBoxFlat_3rs6v")
 show_percentage = false
 
 [node name="EmotionLabel4" type="Label" parent="Panel/MarginContainer/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer2/VBoxContainer2/DominantEmotion4"]

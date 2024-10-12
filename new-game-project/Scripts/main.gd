@@ -1,5 +1,9 @@
 extends Control
-#onready vars load nodes at the very beginning and make sure they are available at any time
+
+# Exporting variables makes them visible on the editor when the node is selected
+@export var progress_bar_gradient: Gradient
+
+# Onready vars load nodes at the very beginning and make sure they are available at any time
 @onready var http_request = %HTTPRequest
 @onready var age_value: Label = %AgeValue
 @onready var race_value: Label = %RaceValue
@@ -23,11 +27,16 @@ var de3_target_value: float = 0
 var de4_target_value: float = 0
 
 # This function is called when each frame is drawn, useful for making anything move, in our case the progress bars
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	dominant_emotion_1.value = lerp(dominant_emotion_1.value, de1_target_value, delta * 2.2)
+	dominant_emotion_1.get("theme_override_styles/fill").bg_color = progress_bar_gradient.sample(dominant_emotion_1.value/100)
 	dominant_emotion_2.value = lerp(dominant_emotion_2.value, de2_target_value, delta * 2.2)
+	dominant_emotion_2.get("theme_override_styles/fill").bg_color = progress_bar_gradient.sample(dominant_emotion_2.value/100)
 	dominant_emotion_3.value = lerp(dominant_emotion_3.value, de3_target_value, delta * 2.2)
+	dominant_emotion_3.get("theme_override_styles/fill").bg_color = progress_bar_gradient.sample(dominant_emotion_3.value/100)
 	dominant_emotion_4.value = lerp(dominant_emotion_4.value, de4_target_value, delta * 2.2)
+	dominant_emotion_4.get("theme_override_styles/fill").bg_color = progress_bar_gradient.sample(dominant_emotion_4.value/100)
+
 
 # This function is connected to the button up event of the LoadImageButton
 func _on_load_image_button_up() -> void:
