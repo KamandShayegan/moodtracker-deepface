@@ -2,7 +2,7 @@
 
 ## Setup
 Before getting into the engine there's two scripts we need to have running in terminal:
-1. **apy.py** python script inside the deepface/api/src directory(not in the repo)
+1. **api.py** python script inside the deepface/api/src directory(not in the repo)
 2. **camera_stream.py** inside the python directory(inside the repo)
 
 ## Running the app
@@ -19,4 +19,5 @@ or you can open an specific script from the node tree at the left by clicking on
 ![image](https://github.com/user-attachments/assets/cb1dd4ef-542e-48af-947a-6e7139cb36ed)
 
 ## Stuff to consider
-The deepface analysis tools seem to be trained for clear, crisp and well lit images. Analysis results gotten from webcam images are probably quite innacurate, good lighting and closeness to the camera might help with this. If a 400 HTTP error pops up in the godot output terminal is probably because the face is not being detected due to the webcam issues previously listed.
+- The deepface analysis tools seem to be trained for clear, crisp and well lit images. Analysis results gotten from webcam images are probably quite innacurate, good lighting and closeness to the camera might help with this.
+- If a 400 HTTP error pops up in the godot output terminal is probably because the face is not being detected due to the webcam issues previously listed.
