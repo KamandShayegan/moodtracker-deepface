@@ -123,9 +123,9 @@ func set_animate_labels(age: String, gender: String, race: String, emotion_value
 	emotion_label_4.text = emotion_value_pairs[3][0]
 	emotion_label_4.visible_ratio = 0
 
-	tween.tween_property(age_value, 'visible_ratio', 1, 0.4)
-	tween.tween_property(gender_value, 'visible_ratio', 1, 0.5)
-	tween.tween_property(race_value, 'visible_ratio', 1, 0.5)
+	tween.tween_property(age_value, 'visible_ratio', 1, 0.35)
+	tween.tween_property(gender_value, 'visible_ratio', 1, 0.45)
+	tween.tween_property(race_value, 'visible_ratio', 1, 0.45)
 	tween.tween_interval(0.4)
 	tween.parallel().tween_property(dominant_emotion_1, 'value', emotion_value_pairs[0][1], 1.7).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
 	tween.parallel().tween_property(emotion_label_1, 'visible_ratio', 1, 0.7)

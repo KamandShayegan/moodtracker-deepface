@@ -59,7 +59,7 @@ progress_bar_gradient = ExtResource("2_jxe27")
 
 [node name="FileDialog" type="FileDialog" parent="."]
 unique_name_in_owner = true
-title = "Choose an Image"
+title = "Open a File"
 initial_position = 2
 size = Vector2i(493, 450)
 ok_button_text = "Open"
