@@ -1,5 +1,7 @@
 extends Control
 
+# TODO: camera stream https://forum.godotengine.org/t/decode-an-image-sent-over-udp-from-python-opencv-to-godot-for-texture-data-use/3531/2
+
 # Exporting variables makes them visible on the editor when the node is selected
 @export var progress_bar_gradient: Gradient
 
@@ -81,12 +83,12 @@ func _on_file_dialog_file_selected(path: String) -> void:
 
 
 func _on_http_request_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray) -> void:
-	# We get the JSON response and parse it
+	# Get the JSON response and parse it
 	var json = JSON.new()
 	json.parse(body.get_string_from_utf8())
 	var response = json.get_data()
 
-	# We sort the emotions by percentage and set them to their respective progress bars
+	# Sort the emotions by percentage and set them to their respective progress bars
 	var emotions: Dictionary = response['results'][0]['emotion']
 	var keys = emotions.keys()
 	# Sort keys in descending order of values.
@@ -102,12 +104,11 @@ func _on_http_request_request_completed(result: int, response_code: int, headers
 		str(response['results'][0]['dominant_race']), 
 		emotion_value_pairs)
 
-	# Set the values to the progress bars and labels
-
 
 func set_animate_labels(age: String, gender: String, race: String, emotion_value_pairs: Array) -> void:
 	var tween = create_tween()
 
+	# Setting the values that'll later be animated
 	age_value.text = age
 	age_value.visible_ratio = 0
 	gender_value.text = gender
@@ -123,6 +124,7 @@ func set_animate_labels(age: String, gender: String, race: String, emotion_value
 	emotion_label_4.text = emotion_value_pairs[3][0]
 	emotion_label_4.visible_ratio = 0
 
+	# Tweening different properties of the UI. Tweening is a way of animating through code. Tweens will wait for the previous tween to have finished to start executing, unless parallel() is specified.
 	tween.tween_property(age_value, 'visible_ratio', 1, 0.35)
 	tween.tween_property(gender_value, 'visible_ratio', 1, 0.45)
 	tween.tween_property(race_value, 'visible_ratio', 1, 0.45)
