@@ -21,5 +21,6 @@ folder_colors={
 "res://Assets/": "orange",
 "res://Resources/": "yellow",
 "res://Scenes/": "green",
-"res://Scripts/": "purple"
+"res://Scripts/": "purple",
+"res://python/": "blue"
 }

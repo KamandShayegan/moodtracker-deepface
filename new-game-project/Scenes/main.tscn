@@ -55,6 +55,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_032ey")
+webcam_update_rate = 2.0
 progress_bar_gradient = ExtResource("2_jxe27")
 
 [node name="FileDialog" type="FileDialog" parent="."]
@@ -263,21 +264,26 @@ theme_override_fonts/font = ExtResource("3_nh00n")
 [node name="PanelContainer" type="PanelContainer" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer2"]
 layout_mode = 2
 
-[node name="PanelContainer2" type="PanelContainer" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer2"]
-layout_mode = 2
-
-[node name="LoadImageButton" type="Button" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer2/MarginContainer"]
+[node name="LoadImageButton" type="Button" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_kbyar")
 theme_override_fonts/font = ExtResource("2_j3cr5")
 text = "Load Image"
 
-[node name="HTTPRequest" type="HTTPRequest" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer2/MarginContainer/LoadImageButton"]
+[node name="HTTPRequest" type="HTTPRequest" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/LoadImageButton"]
 unique_name_in_owner = true
 
+[node name="WebcamButton" type="Button" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_kbyar")
+theme_override_fonts/font = ExtResource("2_j3cr5")
+text = "Webcam"
+
 [connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]
-[connection signal="button_up" from="Panel/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer2/MarginContainer/LoadImageButton" to="." method="_on_load_image_button_up"]
-[connection signal="request_completed" from="Panel/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer2/MarginContainer/LoadImageButton/HTTPRequest" to="." method="_on_http_request_request_completed"]
+[connection signal="button_up" from="Panel/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/LoadImageButton" to="." method="_on_load_image_button_up"]
+[connection signal="request_completed" from="Panel/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/LoadImageButton/HTTPRequest" to="." method="_on_http_request_request_completed"]
+[connection signal="button_up" from="Panel/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/WebcamButton" to="." method="_on_webcam_button_up"]
