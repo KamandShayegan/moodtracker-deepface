@@ -1,0 +1,65 @@
+[gd_scene load_steps=4 format=3 uid="uid://cl6r1qalcou0u"]
+
+[ext_resource type="Script" path="res://Scripts/fill_name.gd" id="1_d8quc"]
+[ext_resource type="FontFile" uid="uid://4thlyosuh7vl" path="res://Assets/Fonts/Poppins/Poppins-Medium.ttf" id="1_ps7tu"]
+[ext_resource type="FontFile" uid="uid://yphs355qgbfo" path="res://Assets/Fonts/Poppins/Poppins-Bold.ttf" id="1_pw0xg"]
+
+[node name="FillName" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_d8quc")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -20.0
+offset_right = 100.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer"]
+custom_minimum_size = Vector2(300, 40)
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("1_pw0xg")
+theme_override_font_sizes/normal_font_size = 25
+bbcode_enabled = true
+text = "[center]What's your  [color=#d355b6]name[/color]?[/center]
+"
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_right = 50
+
+[node name="TextEdit" type="TextEdit" parent="VBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 35)
+layout_mode = 2
+theme_override_colors/background_color = Color(0.976471, 0.839216, 0.933333, 1)
+theme_override_colors/font_placeholder_color = Color(0.377919, 0.377919, 0.377919, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_ps7tu")
+placeholder_text = "Type your name here"
+
+[connection signal="text_changed" from="VBoxContainer/MarginContainer/TextEdit" to="." method="_on_text_edit_text_changed"]

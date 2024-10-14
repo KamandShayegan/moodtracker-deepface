@@ -1,0 +1,123 @@
+[gd_scene load_steps=6 format=3 uid="uid://bsopu7gk1okq5"]
+
+[ext_resource type="Script" path="res://Scripts/on_boarding.gd" id="1_b7xax"]
+[ext_resource type="Theme" uid="uid://jnx23qrh61nf" path="res://Resources/button_theme.tres" id="2_jkjwd"]
+[ext_resource type="FontFile" uid="uid://yphs355qgbfo" path="res://Assets/Fonts/Poppins/Poppins-Bold.ttf" id="3_84aav"]
+[ext_resource type="FontFile" uid="uid://cuio2ur08lvgp" path="res://Assets/Fonts/Poppins/Poppins-ExtraBold.ttf" id="4_26437"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_42t2f"]
+bg_color = Color(0.976014, 0.840729, 0.931422, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+
+[node name="On Boarding" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_b7xax")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -183.5
+offset_right = 183.5
+offset_bottom = 390.0
+grow_horizontal = 2
+theme_override_constants/margin_top = 100
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(230, 230)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_42t2f")
+
+[node name="Label" type="Label" parent="VBoxContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.82669, 0.331393, 0.714738, 1)
+theme_override_fonts/font = ExtResource("4_26437")
+theme_override_font_sizes/font_size = 130
+text = "Mt"
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 20
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("3_84aav")
+theme_override_font_sizes/normal_font_size = 25
+bbcode_enabled = true
+text = "[center]Your Mini [color=#d355b6]M[/color]ood [color=#d355b6]T[/color]racker[/center]
+"
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 70
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="SignUp" type="Button" parent="VBoxContainer/MarginContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+theme = ExtResource("2_jkjwd")
+theme_override_colors/font_color = Color(0.827451, 0.333333, 0.713726, 1)
+theme_override_fonts/font = ExtResource("3_84aav")
+theme_override_font_sizes/font_size = 22
+text = "Sign Up"
+
+[node name="Login" type="Button" parent="VBoxContainer/MarginContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+theme = ExtResource("2_jkjwd")
+theme_override_colors/font_color = Color(0.827451, 0.333333, 0.713726, 1)
+theme_override_fonts/font = ExtResource("3_84aav")
+theme_override_font_sizes/font_size = 22
+text = "Login"
+
+[connection signal="button_up" from="VBoxContainer/MarginContainer2/HBoxContainer/SignUp" to="." method="_on_sign_up_button_up"]
+[connection signal="button_up" from="VBoxContainer/MarginContainer2/HBoxContainer/Login" to="." method="_on_login_button_up"]
