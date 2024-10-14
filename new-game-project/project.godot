@@ -11,13 +11,9 @@ config_version=5
 [application]
 
 config/name="deepface_moodtracker_godot"
-run/main_scene="res://Scenes/main.tscn"
+run/main_scene="res://Scenes/on_boarding.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
-
-[autoload]
-
-Api="*res://Scripts/API.gd"
 
 [file_customization]
 

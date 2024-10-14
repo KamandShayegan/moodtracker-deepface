@@ -1,6 +1,7 @@
 extends Node
 
 static var user_name: String = 'Unai'
+static var first_time: bool = false
 var server: UDPServer
 var chosen_image: Image
 var api_functions = ['analyze','verify']
@@ -10,7 +11,10 @@ var url = 'http://127.0.0.1:5000/'
 func _ready() -> void:
 	server = UDPServer.new()
 	server.listen(4242)
-	%RichTextLabel.text = '[center]Hi [color=#d355b6]'+user_name+'[/color]! Lets take a [color=#d355b6]photo[/color]![/center]'
+	if first_time:
+		%RichTextLabel.text = '[center]Hi [color=#d355b6]'+user_name+'[/color]! Lets take a [color=#d355b6]photo[/color]![/center]'
+	else:
+		%RichTextLabel.text = '[center]Hi again[color=#d355b6]'+user_name+'[/color]! Lets take a [color=#d355b6]photo[/color]![/center]'
 	print(%RichTextLabel.text)
 
 func _process(_delta: float) -> void:
