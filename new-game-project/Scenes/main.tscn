@@ -55,7 +55,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_032ey")
-webcam_update_rate = 2.0
+webcam_update_rate = 1.5
 progress_bar_gradient = ExtResource("2_jxe27")
 
 [node name="FileDialog" type="FileDialog" parent="."]

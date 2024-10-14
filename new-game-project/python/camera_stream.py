@@ -13,7 +13,7 @@ while True:
         print("Error: failed to capture image")
         break
 
-    frame = cv2.resize(frame, (600, 450))
+    frame = cv2.resize(frame, (400, 300))
     frame = cv2.flip(frame, 1)
 
     cv2.putText(
@@ -26,7 +26,7 @@ while True:
         1,
     )
 
-    image = cv2.resize(frame, (600, 450))
+    image = cv2.resize(frame, (400, 300))
 
     _, encoded_image = cv2.imencode(".jpg", image)
 
