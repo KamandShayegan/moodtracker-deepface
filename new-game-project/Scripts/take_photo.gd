@@ -14,7 +14,7 @@ func _ready() -> void:
 	if first_time:
 		%RichTextLabel.text = '[center]Hi [color=#d355b6]'+user_name+'[/color]! Lets take a [color=#d355b6]photo[/color]![/center]'
 	else:
-		%RichTextLabel.text = '[center]Hi again[color=#d355b6]'+user_name+'[/color]! Lets take a [color=#d355b6]photo[/color]![/center]'
+		%RichTextLabel.text = '[center]Hi again [color=#d355b6]'+user_name+'[/color]! Lets take a [color=#d355b6]photo[/color]![/center]'
 	print(%RichTextLabel.text)
 
 func _process(_delta: float) -> void:

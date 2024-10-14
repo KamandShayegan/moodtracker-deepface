@@ -9,8 +9,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept"):
 		if %TextEdit.text != '':
-			take_photo_script.first_time = false
-			get_tree().change_scene_to_file("res://Scenes/take_photo.tscn")
+			take_photo_script.first_time = true
+			SceneTransitions.change_scene("res://Scenes/take_photo.tscn")
 		else:
 			return
 
