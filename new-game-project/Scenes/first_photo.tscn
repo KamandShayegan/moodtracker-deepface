@@ -1610,7 +1610,7 @@ theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 6
 
-[node name="Button2" type="Button" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer2"]
+[node name="Next" type="Button" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
@@ -1619,5 +1619,10 @@ theme_override_fonts/font = ExtResource("3_nl7k5")
 text = "Next
 "
 
+[node name="HTTPRequest" type="HTTPRequest" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer2/Next"]
+unique_name_in_owner = true
+
 [connection signal="timeout" from="PhotoTimer" to="." method="_on_photo_timer_timeout"]
 [connection signal="button_up" from="MarginContainer/VBoxContainer/PanelContainer/MarginContainer/Button" to="." method="_on_button_button_up"]
+[connection signal="button_up" from="MarginContainer/VBoxContainer/PanelContainer/MarginContainer2/Next" to="." method="_on_next_button_up"]
+[connection signal="request_completed" from="MarginContainer/VBoxContainer/PanelContainer/MarginContainer2/Next/HTTPRequest" to="." method="_on_http_request_request_completed"]

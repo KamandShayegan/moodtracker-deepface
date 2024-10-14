@@ -3,6 +3,9 @@ extends Node
 static var user_name: String = 'Unai'
 var server: UDPServer
 var chosen_image: Image
+var api_functions = ['analyze','verify']
+var url = 'http://127.0.0.1:5000/'
+
 
 func _ready() -> void:
 	server = UDPServer.new()
@@ -21,10 +24,10 @@ func _process(_delta: float) -> void:
 	
 	if !chosen_image:
 		%Button.text = 'Take a picture'
-		%Button2.visible = false
+		%Next.visible = false
 	else:
 		%Button.text = 'Take another picture'
-		%Button2.visible = true
+		%Next.visible = true
 
 	server.poll()
 	if server.is_connection_available() and (!chosen_image or !%PhotoTimer.is_stopped()):
@@ -49,3 +52,38 @@ func _on_photo_timer_timeout() -> void:
 func _on_button_button_up() -> void:
 	chosen_image = null
 	%PhotoTimer.start()
+
+
+func _on_next_button_up() -> void:
+	send_http_deepface_request(chosen_image, api_functions[0])
+
+func send_http_deepface_request(image: Image, function_name: String) -> void:
+	print('Sending request with image: ',image,' , function_name: ',function_name)
+	var base_64_data = Marshalls.raw_to_base64(image.save_jpg_to_buffer())
+	var body = JSON.new().stringify({
+		"img_path": str('data:image/jpeg;base64,',base_64_data),
+		"actions": ["age", "gender", "emotion", "race"],
+		"detector_backend": "opencv"
+		})
+	var headers: PackedStringArray = ['Content-type:application/json']
+	%HTTPRequest.request(url+function_name, headers, HTTPClient.METHOD_POST, body)
+
+func _on_http_request_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray) -> void:
+	if response_code != 200:
+		printerr('HTTP Error ',response_code)
+		if response_code == 400:
+			printerr('Probably couldnt detect a face, try a different pose or better lighting')
+		return
+	# Get the JSON response and parse it
+	var json = JSON.new()
+	json.parse(body.get_string_from_utf8())
+	var response = json.get_data()
+
+	# Sort the emotions by percentage and set them to their respective progress bars
+	var emotions: Dictionary = response['results'][0]['emotion']
+	var keys = emotions.keys()
+	# Sort keys in descending order of values.
+	keys.sort_custom(func(x: String, y: String) -> bool: return emotions[x] > emotions[y])
+	var emotion_value_pairs: Array = []
+	for k: String in keys:
+		emotion_value_pairs.append([k,emotions[k]])
