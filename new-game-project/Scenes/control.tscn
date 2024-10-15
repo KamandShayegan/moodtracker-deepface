@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bds6ava1u12af"]
 
-[ext_resource type="Script" path="res://pruebaGodot.gd" id="1_s6prg"]
+[ext_resource type="Script" path="res://Scripts/pruebaGodot.gd" id="1_s6prg"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
