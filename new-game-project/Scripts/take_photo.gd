@@ -6,6 +6,9 @@ var server: UDPServer
 var chosen_image: Image
 var api_functions = ['analyze','verify']
 var url = 'http://127.0.0.1:5000/'
+var http_response
+
+signal response_recieved
 
 
 func _ready() -> void:
@@ -15,7 +18,6 @@ func _ready() -> void:
 		%RichTextLabel.text = '[center]Hi [color=#d355b6]'+user_name+'[/color]! Lets take a [color=#d355b6]photo[/color]![/center]'
 	else:
 		%RichTextLabel.text = "[center]Let's [color=#d355b6]identify[/color] you shall we?[/center]"
-	print(SqlDatabase.get_users())
 
 func _process(_delta: float) -> void:
 	if %PhotoTimer.is_stopped():
@@ -65,7 +67,14 @@ func _on_next_button_up() -> void:
 	for user: Dictionary in users:
 		var image := Image.new()
 		image.load_jpg_from_buffer(Marshalls.base64_to_raw((user['picture'])))
-		send_verify_request(chosen_image, image)
+		%Image.texture = ImageTexture.create_from_image(image)
+		send_verify_request(chosen_image, chosen_image)
+		await Signal(self, 'response_recieved')
+		existing_face = http_response['verified']
+		if existing_face:
+			%RichTextLabel.text = '[center]You are already in the database![/center]'
+	if !existing_face:
+		SqlDatabase.add_user(user_name, chosen_image)
 
 func send_http_deepface_request(image: Image, function_name: String) -> void:
 	print('Sending request with image: ',image,' , function_name: ',function_name)
@@ -83,7 +92,10 @@ func send_verify_request(image1: Image, image2: Image) -> void:
 	var base_64_data2 = Marshalls.raw_to_base64(image2.save_jpg_to_buffer())
 	var body = JSON.new().stringify({
 		"img1_path": str('data:image/jpeg;base64,',base_64_data1),
-		"img2_path": str('data:image/jpeg;base64,',base_64_data2)
+		"img2_path": str('data:image/jpeg;base64,',base_64_data2),
+		"model_name": "Facenet",
+		"detector_backend": "opencv",
+		"distance_metric": "euclidean"
 		})
 	var headers: PackedStringArray = ['Content-type:application/json']
 	%HTTPRequest.request(url+'verify', headers, HTTPClient.METHOD_POST, body)
@@ -100,10 +112,14 @@ func _on_http_request_request_completed(result: int, response_code: int, headers
 	var response = json.get_data()
 
 	# Sort the emotions by percentage and set them to their respective progress bars
-	var emotions: Dictionary = response['results'][0]['emotion']
-	var keys = emotions.keys()
-	# Sort keys in descending order of values.
-	keys.sort_custom(func(x: String, y: String) -> bool: return emotions[x] > emotions[y])
-	var emotion_value_pairs: Array = []
-	for k: String in keys:
-		emotion_value_pairs.append([k,emotions[k]])
+	if response['verified']:
+		http_response = response
+		response_recieved.emit()
+	elif response['results'][0]['emotion']:
+		var emotions: Dictionary = response['results'][0]['emotion']
+		var keys = emotions.keys()
+		# Sort keys in descending order of values.
+		keys.sort_custom(func(x: String, y: String) -> bool: return emotions[x] > emotions[y])
+		var emotion_value_pairs: Array = []
+		for k: String in keys:
+			emotion_value_pairs.append([k,emotions[k]])
