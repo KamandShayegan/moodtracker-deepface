@@ -5,8 +5,9 @@ func _ready() -> void:
 	database = SQLite.new()
 	database.path = "res://data.db"
 	database.open_db()
+	#database.delete_rows('users','*')
 	#var image = Image.new()
-	#image.load("res://Assets/Images/2024-10-12-220632.jpg")
+	#image.load("res://Assets/Images/2024-10-13-033327.jpg")
 	#add_user('Unai',image)
 
 func set_user_table() -> void:

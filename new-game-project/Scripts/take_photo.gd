@@ -67,8 +67,7 @@ func _on_next_button_up() -> void:
 	for user: Dictionary in users:
 		var image := Image.new()
 		image.load_jpg_from_buffer(Marshalls.base64_to_raw((user['picture'])))
-		%Image.texture = ImageTexture.create_from_image(image)
-		send_verify_request(chosen_image, chosen_image)
+		send_verify_request(chosen_image, image)
 		await Signal(self, 'response_recieved')
 		existing_face = http_response['verified']
 		if existing_face:
