@@ -15,6 +15,7 @@ func _ready() -> void:
 		%RichTextLabel.text = '[center]Hi [color=#d355b6]'+user_name+'[/color]! Lets take a [color=#d355b6]photo[/color]![/center]'
 	else:
 		%RichTextLabel.text = "[center]Let's [color=#d355b6]identify[/color] you shall we?[/center]"
+	print(SqlDatabase.get_users())
 
 func _process(_delta: float) -> void:
 	if %PhotoTimer.is_stopped():
@@ -58,7 +59,13 @@ func _on_button_button_up() -> void:
 
 
 func _on_next_button_up() -> void:
-	send_http_deepface_request(chosen_image, api_functions[0])
+	var existing_face = false
+	var users: Array = SqlDatabase.get_users()
+	
+	for user: Dictionary in users:
+		var image := Image.new()
+		image.load_jpg_from_buffer(Marshalls.base64_to_raw((user['picture'])))
+		send_verify_request(chosen_image, image)
 
 func send_http_deepface_request(image: Image, function_name: String) -> void:
 	print('Sending request with image: ',image,' , function_name: ',function_name)
@@ -70,6 +77,16 @@ func send_http_deepface_request(image: Image, function_name: String) -> void:
 		})
 	var headers: PackedStringArray = ['Content-type:application/json']
 	%HTTPRequest.request(url+function_name, headers, HTTPClient.METHOD_POST, body)
+
+func send_verify_request(image1: Image, image2: Image) -> void:
+	var base_64_data1 = Marshalls.raw_to_base64(image1.save_jpg_to_buffer())
+	var base_64_data2 = Marshalls.raw_to_base64(image2.save_jpg_to_buffer())
+	var body = JSON.new().stringify({
+		"img1_path": str('data:image/jpeg;base64,',base_64_data1),
+		"img2_path": str('data:image/jpeg;base64,',base_64_data2)
+		})
+	var headers: PackedStringArray = ['Content-type:application/json']
+	%HTTPRequest.request(url+'verify', headers, HTTPClient.METHOD_POST, body)
 
 func _on_http_request_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray) -> void:
 	if response_code != 200:

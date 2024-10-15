@@ -12,11 +12,12 @@ func _on_add_user_button_down() -> void:
 		"name": {"data_type": "text", "unique": true, "not_null": true},
 		"picture": {"data_type": "BLOB", "not_null": true}
 	}
-	database.create_table("users", table)
+	database.create_table("users_pictures", table)
 	var data = {
-		"name": $Name.text
+		"name": $Name.text,
+		"picture": 'pasfjoaihfSJAFOIHAOPFhaSFOniaLKsfnñalKsfn'
 	}
-	database.insert_row("users", data)
+	database.insert_row("users_pictures", data)
 	
 	pass # Replace with function body.
 

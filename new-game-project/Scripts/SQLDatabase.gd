@@ -5,22 +5,26 @@ func _ready() -> void:
 	database = SQLite.new()
 	database.path = "res://data.db"
 	database.open_db()
+	var image = Image.new()
+	image.load("res://Assets/Images/2024-10-12-220632.jpg")
+	add_user('Unai',image)
 
-func _on_add_user_button_down() -> void:
+func set_user_table() -> void:
 	var table = {
 		"id": {"data_type": "int", "primary_key": true, "not_null": true, "auto_increment": true},
 		"name": {"data_type": "text", "unique": true, "not_null": true},
 		"picture": {"data_type": "BLOB", "not_null": true}
 	}
 	database.create_table("users", table)
+
+func add_user(name: String, picture: Image) -> void:
+	var base_64_data = Marshalls.raw_to_base64(picture.save_jpg_to_buffer())
 	var data = {
-		"name": $Name.text
+		"name": 'Unai',
+		"picture": base_64_data
 	}
 	database.insert_row("users", data)
-	
-	pass # Replace with function body.
 
 
-func _on_see_content_button_down() -> void:
-	print(database.select_rows("users", "", ["*"]))
-	pass # Replace with function body.
+func get_users() -> Array:
+	return database.select_rows("users", "", ["*"])
