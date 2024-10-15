@@ -1,0 +1,793 @@
+[gd_scene load_steps=46 format=3 uid="uid://kxgahnnjc175"]
+
+[ext_resource type="Script" path="res://Scripts/pruebacalendar.gd" id="1_y81yw"]
+[ext_resource type="FontFile" uid="uid://yphs355qgbfo" path="res://Assets/Fonts/Poppins/Poppins-Bold.ttf" id="2_075ln"]
+[ext_resource type="Theme" uid="uid://jnx23qrh61nf" path="res://Resources/button_theme.tres" id="3_0ntko"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6i2e8"]
+bg_color = Color(0.138149, 0.652463, 0.6428, 0.85098)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_64ep4"]
+bg_color = Color(0.875025, 0.348557, 0.660634, 0.85098)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pmpcf"]
+bg_color = Color(0.875025, 0.348557, 0.660634, 0.85098)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0cwp8"]
+bg_color = Color(0.875025, 0.348557, 0.660634, 0.85098)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o6in8"]
+bg_color = Color(0.875025, 0.348557, 0.660634, 0.85098)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ftc32"]
+bg_color = Color(0.875025, 0.348557, 0.660634, 0.85098)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rjp63"]
+bg_color = Color(0.875025, 0.348557, 0.660634, 0.85098)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8eaqb"]
+bg_color = Color(0.875025, 0.348557, 0.660634, 0.85098)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_je51n"]
+bg_color = Color(0.875025, 0.348557, 0.660634, 0.85098)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5tmax"]
+bg_color = Color(0.875025, 0.348557, 0.660634, 0.85098)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bcy48"]
+bg_color = Color(0.875025, 0.348557, 0.660634, 0.85098)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4ryss"]
+bg_color = Color(0.875025, 0.348557, 0.660634, 0.85098)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c245h"]
+bg_color = Color(0.875025, 0.348557, 0.660634, 0.85098)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b824k"]
+bg_color = Color(0.875025, 0.348557, 0.660634, 0.85098)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a3nlt"]
+bg_color = Color(0.875025, 0.348557, 0.660634, 0.85098)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qyr6i"]
+bg_color = Color(0.875025, 0.348557, 0.660634, 0.85098)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2rdcn"]
+bg_color = Color(0.875025, 0.348557, 0.660634, 0.85098)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yd1yu"]
+bg_color = Color(0.875025, 0.348557, 0.660634, 0.85098)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3xs15"]
+bg_color = Color(0.875025, 0.348557, 0.660634, 0.85098)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5bsda"]
+bg_color = Color(0.875025, 0.348557, 0.660634, 0.85098)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ir405"]
+bg_color = Color(0.875025, 0.348557, 0.660634, 0.85098)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p8o7u"]
+bg_color = Color(0.875025, 0.348557, 0.660634, 0.85098)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_00ap8"]
+bg_color = Color(0.875025, 0.348557, 0.660634, 0.85098)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d0ngx"]
+bg_color = Color(0.875025, 0.348557, 0.660634, 0.85098)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_binah"]
+bg_color = Color(0.875025, 0.348557, 0.660634, 0.85098)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1v26o"]
+bg_color = Color(0.875025, 0.348557, 0.660634, 0.85098)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q8trb"]
+bg_color = Color(0.875025, 0.348557, 0.660634, 0.85098)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gstnq"]
+bg_color = Color(0.875025, 0.348557, 0.660634, 0.85098)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eqyr7"]
+bg_color = Color(0.875025, 0.348557, 0.660634, 0.85098)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0yiv3"]
+bg_color = Color(0.875025, 0.348557, 0.660634, 0.85098)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8eopg"]
+bg_color = Color(0.875025, 0.348557, 0.660634, 0.85098)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_we0j2"]
+bg_color = Color(0.875025, 0.348557, 0.660634, 0.85098)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oticg"]
+bg_color = Color(0.875025, 0.348557, 0.660634, 0.85098)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6gpsu"]
+bg_color = Color(0.875025, 0.348557, 0.660634, 0.85098)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j4gq5"]
+bg_color = Color(0.875025, 0.348557, 0.660634, 0.85098)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nog0x"]
+bg_color = Color(0.875025, 0.348557, 0.660634, 0.85098)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dlyo4"]
+bg_color = Color(0.875025, 0.348557, 0.660634, 0.85098)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sjalx"]
+bg_color = Color(0.875025, 0.348557, 0.660634, 0.85098)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ogoxk"]
+bg_color = Color(0.875025, 0.348557, 0.660634, 0.85098)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jvgqu"]
+bg_color = Color(0.875025, 0.348557, 0.660634, 0.85098)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tju0g"]
+bg_color = Color(0.875025, 0.348557, 0.660634, 0.85098)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t4crf"]
+bg_color = Color(0.875025, 0.348557, 0.660634, 0.85098)
+
+[node name="Calendar" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+script = ExtResource("1_y81yw")
+emotion_dict = {
+"angry": Color(0.95048, 0.402287, 0.341377, 1),
+"disgust": Color(0.438722, 0.794753, 0.407995, 1),
+"fear": Color(1, 0.578112, 0.984983, 1),
+"happy": Color(0.921569, 0.882353, 0.584314, 1),
+"neutral": Color(0.65834, 0.65834, 0.65834, 1),
+"sad": Color(0.294118, 0.631373, 0.933333, 1),
+"surprise": Color(1, 0.317226, 0.561896, 1)
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -91.5
+offset_right = 91.5
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -239.5
+offset_top = -253.5
+offset_right = 239.5
+offset_bottom = 253.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 80
+alignment = 1
+
+[node name="month_label" type="Label" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_075ln")
+theme_override_font_sizes/font_size = 25
+text = "Month"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="year_label" type="Label" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_075ln")
+theme_override_font_sizes/font_size = 25
+text = "Year"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+columns = 7
+
+[node name="PanelContainer1" type="PanelContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6i2e8")
+
+[node name="VBoxContainer42" type="VBoxContainer" parent="VBoxContainer/GridContainer/PanelContainer1"]
+custom_minimum_size = Vector2(65, 65)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GridContainer/PanelContainer1/VBoxContainer42"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_075ln")
+theme_override_font_sizes/font_size = 20
+
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_64ep4")
+
+[node name="VBoxContainer42" type="VBoxContainer" parent="VBoxContainer/GridContainer/PanelContainer2"]
+custom_minimum_size = Vector2(65, 65)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GridContainer/PanelContainer2/VBoxContainer42"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_075ln")
+theme_override_font_sizes/font_size = 20
+
+[node name="PanelContainer3" type="PanelContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pmpcf")
+
+[node name="VBoxContainer42" type="VBoxContainer" parent="VBoxContainer/GridContainer/PanelContainer3"]
+custom_minimum_size = Vector2(65, 65)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GridContainer/PanelContainer3/VBoxContainer42"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_075ln")
+theme_override_font_sizes/font_size = 20
+
+[node name="PanelContainer4" type="PanelContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0cwp8")
+
+[node name="VBoxContainer42" type="VBoxContainer" parent="VBoxContainer/GridContainer/PanelContainer4"]
+custom_minimum_size = Vector2(65, 65)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GridContainer/PanelContainer4/VBoxContainer42"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_075ln")
+theme_override_font_sizes/font_size = 20
+
+[node name="PanelContainer5" type="PanelContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_o6in8")
+
+[node name="VBoxContainer42" type="VBoxContainer" parent="VBoxContainer/GridContainer/PanelContainer5"]
+custom_minimum_size = Vector2(65, 65)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GridContainer/PanelContainer5/VBoxContainer42"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_075ln")
+theme_override_font_sizes/font_size = 20
+
+[node name="PanelContainer6" type="PanelContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ftc32")
+
+[node name="VBoxContainer42" type="VBoxContainer" parent="VBoxContainer/GridContainer/PanelContainer6"]
+custom_minimum_size = Vector2(65, 65)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GridContainer/PanelContainer6/VBoxContainer42"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_075ln")
+theme_override_font_sizes/font_size = 20
+
+[node name="PanelContainer7" type="PanelContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rjp63")
+
+[node name="VBoxContainer42" type="VBoxContainer" parent="VBoxContainer/GridContainer/PanelContainer7"]
+custom_minimum_size = Vector2(65, 65)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GridContainer/PanelContainer7/VBoxContainer42"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_075ln")
+theme_override_font_sizes/font_size = 20
+
+[node name="PanelContainer8" type="PanelContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8eaqb")
+
+[node name="VBoxContainer42" type="VBoxContainer" parent="VBoxContainer/GridContainer/PanelContainer8"]
+custom_minimum_size = Vector2(65, 65)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GridContainer/PanelContainer8/VBoxContainer42"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_075ln")
+theme_override_font_sizes/font_size = 20
+
+[node name="PanelContainer9" type="PanelContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_je51n")
+
+[node name="VBoxContainer42" type="VBoxContainer" parent="VBoxContainer/GridContainer/PanelContainer9"]
+custom_minimum_size = Vector2(65, 65)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GridContainer/PanelContainer9/VBoxContainer42"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_075ln")
+theme_override_font_sizes/font_size = 20
+
+[node name="PanelContainer10" type="PanelContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5tmax")
+
+[node name="VBoxContainer42" type="VBoxContainer" parent="VBoxContainer/GridContainer/PanelContainer10"]
+custom_minimum_size = Vector2(65, 65)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GridContainer/PanelContainer10/VBoxContainer42"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_075ln")
+theme_override_font_sizes/font_size = 20
+
+[node name="PanelContainer11" type="PanelContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bcy48")
+
+[node name="VBoxContainer42" type="VBoxContainer" parent="VBoxContainer/GridContainer/PanelContainer11"]
+custom_minimum_size = Vector2(65, 65)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GridContainer/PanelContainer11/VBoxContainer42"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_075ln")
+theme_override_font_sizes/font_size = 20
+
+[node name="PanelContainer12" type="PanelContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4ryss")
+
+[node name="VBoxContainer42" type="VBoxContainer" parent="VBoxContainer/GridContainer/PanelContainer12"]
+custom_minimum_size = Vector2(65, 65)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GridContainer/PanelContainer12/VBoxContainer42"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_075ln")
+theme_override_font_sizes/font_size = 20
+
+[node name="PanelContainer13" type="PanelContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_c245h")
+
+[node name="VBoxContainer42" type="VBoxContainer" parent="VBoxContainer/GridContainer/PanelContainer13"]
+custom_minimum_size = Vector2(65, 65)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GridContainer/PanelContainer13/VBoxContainer42"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_075ln")
+theme_override_font_sizes/font_size = 20
+
+[node name="PanelContainer14" type="PanelContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_b824k")
+
+[node name="VBoxContainer42" type="VBoxContainer" parent="VBoxContainer/GridContainer/PanelContainer14"]
+custom_minimum_size = Vector2(65, 65)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GridContainer/PanelContainer14/VBoxContainer42"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_075ln")
+theme_override_font_sizes/font_size = 20
+
+[node name="PanelContainer15" type="PanelContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_a3nlt")
+
+[node name="VBoxContainer42" type="VBoxContainer" parent="VBoxContainer/GridContainer/PanelContainer15"]
+custom_minimum_size = Vector2(65, 65)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GridContainer/PanelContainer15/VBoxContainer42"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_075ln")
+theme_override_font_sizes/font_size = 20
+
+[node name="PanelContainer16" type="PanelContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_qyr6i")
+
+[node name="VBoxContainer42" type="VBoxContainer" parent="VBoxContainer/GridContainer/PanelContainer16"]
+custom_minimum_size = Vector2(65, 65)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GridContainer/PanelContainer16/VBoxContainer42"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_075ln")
+theme_override_font_sizes/font_size = 20
+
+[node name="PanelContainer17" type="PanelContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2rdcn")
+
+[node name="VBoxContainer42" type="VBoxContainer" parent="VBoxContainer/GridContainer/PanelContainer17"]
+custom_minimum_size = Vector2(65, 65)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GridContainer/PanelContainer17/VBoxContainer42"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_075ln")
+theme_override_font_sizes/font_size = 20
+
+[node name="PanelContainer18" type="PanelContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_yd1yu")
+
+[node name="VBoxContainer42" type="VBoxContainer" parent="VBoxContainer/GridContainer/PanelContainer18"]
+custom_minimum_size = Vector2(65, 65)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GridContainer/PanelContainer18/VBoxContainer42"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_075ln")
+theme_override_font_sizes/font_size = 20
+
+[node name="PanelContainer19" type="PanelContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3xs15")
+
+[node name="VBoxContainer42" type="VBoxContainer" parent="VBoxContainer/GridContainer/PanelContainer19"]
+custom_minimum_size = Vector2(65, 65)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GridContainer/PanelContainer19/VBoxContainer42"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_075ln")
+theme_override_font_sizes/font_size = 20
+
+[node name="PanelContainer20" type="PanelContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5bsda")
+
+[node name="VBoxContainer42" type="VBoxContainer" parent="VBoxContainer/GridContainer/PanelContainer20"]
+custom_minimum_size = Vector2(65, 65)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GridContainer/PanelContainer20/VBoxContainer42"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_075ln")
+theme_override_font_sizes/font_size = 20
+
+[node name="PanelContainer21" type="PanelContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ir405")
+
+[node name="VBoxContainer42" type="VBoxContainer" parent="VBoxContainer/GridContainer/PanelContainer21"]
+custom_minimum_size = Vector2(65, 65)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GridContainer/PanelContainer21/VBoxContainer42"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_075ln")
+theme_override_font_sizes/font_size = 20
+
+[node name="PanelContainer22" type="PanelContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_p8o7u")
+
+[node name="VBoxContainer42" type="VBoxContainer" parent="VBoxContainer/GridContainer/PanelContainer22"]
+custom_minimum_size = Vector2(65, 65)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GridContainer/PanelContainer22/VBoxContainer42"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_075ln")
+theme_override_font_sizes/font_size = 20
+
+[node name="PanelContainer23" type="PanelContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_00ap8")
+
+[node name="VBoxContainer42" type="VBoxContainer" parent="VBoxContainer/GridContainer/PanelContainer23"]
+custom_minimum_size = Vector2(65, 65)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GridContainer/PanelContainer23/VBoxContainer42"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_075ln")
+theme_override_font_sizes/font_size = 20
+
+[node name="PanelContainer24" type="PanelContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_d0ngx")
+
+[node name="VBoxContainer42" type="VBoxContainer" parent="VBoxContainer/GridContainer/PanelContainer24"]
+custom_minimum_size = Vector2(65, 65)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GridContainer/PanelContainer24/VBoxContainer42"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_075ln")
+theme_override_font_sizes/font_size = 20
+
+[node name="PanelContainer25" type="PanelContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_binah")
+
+[node name="VBoxContainer42" type="VBoxContainer" parent="VBoxContainer/GridContainer/PanelContainer25"]
+custom_minimum_size = Vector2(65, 65)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GridContainer/PanelContainer25/VBoxContainer42"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_075ln")
+theme_override_font_sizes/font_size = 20
+
+[node name="PanelContainer26" type="PanelContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1v26o")
+
+[node name="VBoxContainer42" type="VBoxContainer" parent="VBoxContainer/GridContainer/PanelContainer26"]
+custom_minimum_size = Vector2(65, 65)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GridContainer/PanelContainer26/VBoxContainer42"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_075ln")
+theme_override_font_sizes/font_size = 20
+
+[node name="PanelContainer27" type="PanelContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_q8trb")
+
+[node name="VBoxContainer42" type="VBoxContainer" parent="VBoxContainer/GridContainer/PanelContainer27"]
+custom_minimum_size = Vector2(65, 65)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GridContainer/PanelContainer27/VBoxContainer42"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_075ln")
+theme_override_font_sizes/font_size = 20
+
+[node name="PanelContainer28" type="PanelContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_gstnq")
+
+[node name="VBoxContainer42" type="VBoxContainer" parent="VBoxContainer/GridContainer/PanelContainer28"]
+custom_minimum_size = Vector2(65, 65)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GridContainer/PanelContainer28/VBoxContainer42"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_075ln")
+theme_override_font_sizes/font_size = 20
+
+[node name="PanelContainer29" type="PanelContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_eqyr7")
+
+[node name="VBoxContainer42" type="VBoxContainer" parent="VBoxContainer/GridContainer/PanelContainer29"]
+custom_minimum_size = Vector2(65, 65)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GridContainer/PanelContainer29/VBoxContainer42"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_075ln")
+theme_override_font_sizes/font_size = 20
+
+[node name="PanelContainer30" type="PanelContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0yiv3")
+
+[node name="VBoxContainer42" type="VBoxContainer" parent="VBoxContainer/GridContainer/PanelContainer30"]
+custom_minimum_size = Vector2(65, 65)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GridContainer/PanelContainer30/VBoxContainer42"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_075ln")
+theme_override_font_sizes/font_size = 20
+
+[node name="PanelContainer31" type="PanelContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8eopg")
+
+[node name="VBoxContainer42" type="VBoxContainer" parent="VBoxContainer/GridContainer/PanelContainer31"]
+custom_minimum_size = Vector2(65, 65)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GridContainer/PanelContainer31/VBoxContainer42"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_075ln")
+theme_override_font_sizes/font_size = 20
+
+[node name="PanelContainer32" type="PanelContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_we0j2")
+
+[node name="VBoxContainer42" type="VBoxContainer" parent="VBoxContainer/GridContainer/PanelContainer32"]
+custom_minimum_size = Vector2(65, 65)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GridContainer/PanelContainer32/VBoxContainer42"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_075ln")
+theme_override_font_sizes/font_size = 20
+
+[node name="PanelContainer33" type="PanelContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_oticg")
+
+[node name="VBoxContainer42" type="VBoxContainer" parent="VBoxContainer/GridContainer/PanelContainer33"]
+custom_minimum_size = Vector2(65, 65)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GridContainer/PanelContainer33/VBoxContainer42"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_075ln")
+theme_override_font_sizes/font_size = 20
+
+[node name="PanelContainer34" type="PanelContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6gpsu")
+
+[node name="VBoxContainer42" type="VBoxContainer" parent="VBoxContainer/GridContainer/PanelContainer34"]
+custom_minimum_size = Vector2(65, 65)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GridContainer/PanelContainer34/VBoxContainer42"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_075ln")
+theme_override_font_sizes/font_size = 20
+
+[node name="PanelContainer35" type="PanelContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_j4gq5")
+
+[node name="VBoxContainer42" type="VBoxContainer" parent="VBoxContainer/GridContainer/PanelContainer35"]
+custom_minimum_size = Vector2(65, 65)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GridContainer/PanelContainer35/VBoxContainer42"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_075ln")
+theme_override_font_sizes/font_size = 20
+
+[node name="PanelContainer36" type="PanelContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_nog0x")
+
+[node name="VBoxContainer42" type="VBoxContainer" parent="VBoxContainer/GridContainer/PanelContainer36"]
+custom_minimum_size = Vector2(65, 65)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GridContainer/PanelContainer36/VBoxContainer42"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_075ln")
+theme_override_font_sizes/font_size = 20
+
+[node name="PanelContainer37" type="PanelContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dlyo4")
+
+[node name="VBoxContainer42" type="VBoxContainer" parent="VBoxContainer/GridContainer/PanelContainer37"]
+custom_minimum_size = Vector2(65, 65)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GridContainer/PanelContainer37/VBoxContainer42"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_075ln")
+theme_override_font_sizes/font_size = 20
+
+[node name="PanelContainer38" type="PanelContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_sjalx")
+
+[node name="VBoxContainer42" type="VBoxContainer" parent="VBoxContainer/GridContainer/PanelContainer38"]
+custom_minimum_size = Vector2(65, 65)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GridContainer/PanelContainer38/VBoxContainer42"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_075ln")
+theme_override_font_sizes/font_size = 20
+
+[node name="PanelContainer39" type="PanelContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ogoxk")
+
+[node name="VBoxContainer42" type="VBoxContainer" parent="VBoxContainer/GridContainer/PanelContainer39"]
+custom_minimum_size = Vector2(65, 65)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GridContainer/PanelContainer39/VBoxContainer42"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_075ln")
+theme_override_font_sizes/font_size = 20
+
+[node name="PanelContainer40" type="PanelContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_jvgqu")
+
+[node name="VBoxContainer42" type="VBoxContainer" parent="VBoxContainer/GridContainer/PanelContainer40"]
+custom_minimum_size = Vector2(65, 65)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GridContainer/PanelContainer40/VBoxContainer42"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_075ln")
+theme_override_font_sizes/font_size = 20
+
+[node name="PanelContainer41" type="PanelContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tju0g")
+
+[node name="VBoxContainer42" type="VBoxContainer" parent="VBoxContainer/GridContainer/PanelContainer41"]
+custom_minimum_size = Vector2(65, 65)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GridContainer/PanelContainer41/VBoxContainer42"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_075ln")
+theme_override_font_sizes/font_size = 20
+
+[node name="PanelContainer42" type="PanelContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_t4crf")
+
+[node name="VBoxContainer42" type="VBoxContainer" parent="VBoxContainer/GridContainer/PanelContainer42"]
+custom_minimum_size = Vector2(65, 65)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/GridContainer/PanelContainer42/VBoxContainer42"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_075ln")
+theme_override_font_sizes/font_size = 20
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 10
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 90
+alignment = 1
+
+[node name="previus" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+theme = ExtResource("3_0ntko")
+theme_override_colors/font_focus_color = Color(0.827451, 0.333333, 0.713726, 1)
+theme_override_colors/font_color = Color(0.827451, 0.333333, 0.713726, 1)
+theme_override_fonts/font = ExtResource("2_075ln")
+text = "Previus month"
+
+[node name="next" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+theme = ExtResource("3_0ntko")
+theme_override_colors/font_focus_color = Color(0.827451, 0.333333, 0.713726, 1)
+theme_override_colors/font_color = Color(0.827451, 0.333333, 0.713726, 1)
+theme_override_fonts/font = ExtResource("2_075ln")
+text = "Next  month"
+
+[connection signal="button_down" from="VBoxContainer/MarginContainer/HBoxContainer2/previus" to="." method="_on_previus_button_down"]
+[connection signal="button_down" from="VBoxContainer/MarginContainer/HBoxContainer2/next" to="." method="_on_next_button_down"]

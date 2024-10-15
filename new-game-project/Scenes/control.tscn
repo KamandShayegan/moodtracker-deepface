@@ -1,0 +1,85 @@
+[gd_scene load_steps=2 format=3 uid="uid://bds6ava1u12af"]
+
+[ext_resource type="Script" path="res://pruebaGodot.gd" id="1_s6prg"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -56.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_s6prg")
+
+[node name="addUser" type="Button" parent="."]
+layout_mode = 0
+offset_left = 447.0
+offset_top = 324.0
+offset_right = 624.0
+offset_bottom = 369.0
+text = "Add user"
+
+[node name="seeContent" type="Button" parent="."]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 173.0
+offset_right = 210.0
+offset_bottom = 218.0
+text = "See user information"
+
+[node name="loadImage" type="Button" parent="."]
+layout_mode = 0
+offset_left = 453.0
+offset_top = 185.0
+offset_right = 630.0
+offset_bottom = 230.0
+text = "Load image"
+
+[node name="deleteUser" type="Button" parent="."]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 291.0
+offset_right = 208.0
+offset_bottom = 336.0
+text = "Delete user"
+
+[node name="nameLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 380.0
+offset_top = 108.0
+offset_right = 446.0
+offset_bottom = 131.0
+text = "Name"
+
+[node name="nameLabel2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 379.0
+offset_top = 196.0
+offset_right = 445.0
+offset_bottom = 219.0
+text = "Image"
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 759.0
+offset_top = 404.0
+offset_right = 993.0
+offset_bottom = 437.0
+text = "see calendar"
+
+[node name="Name" type="TextEdit" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.003
+anchor_top = 0.009
+anchor_right = 0.003
+anchor_bottom = 0.009
+offset_left = 435.1
+offset_top = 96.296
+offset_right = 631.1
+offset_bottom = 127.296
+
+[connection signal="button_down" from="addUser" to="." method="_on_add_user_button_down"]
+[connection signal="button_down" from="seeContent" to="." method="_on_see_content_button_down"]
+[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
