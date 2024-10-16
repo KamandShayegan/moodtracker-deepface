@@ -1,5 +1,6 @@
 extends Node
 
+var calendar_script := preload("res://Scripts/pruebacalendar.gd")
 static var user_name: String = 'Unai'
 static var first_time: bool = false
 var server: UDPServer
@@ -63,6 +64,7 @@ func _on_button_button_up() -> void:
 func _on_next_button_up() -> void:
 	var existing_face = false
 	var users: Array = SqlDatabase.get_users()
+	%RichTextLabel.text = "[center]We're checking the [color=#d355b6]database[/color][/center]"
 	
 	for user: Dictionary in users:
 		var image := Image.new()
@@ -70,10 +72,15 @@ func _on_next_button_up() -> void:
 		send_verify_request(chosen_image, image)
 		await Signal(self, 'response_recieved')
 		existing_face = http_response['verified']
-		if existing_face:
-			%RichTextLabel.text = '[center]You are already in the database![/center]'
-	if !existing_face:
+		if existing_face and first_time:
+			%RichTextLabel.text = '[center]You are already in the [color=#d355b6]database[/color]![/center]'
+		elif existing_face:
+			calendar_script.user_name = user["name"]
+			SceneTransitions.change_scene("res://Scenes/calendar.tscn")
+	if !existing_face and first_time:
 		SqlDatabase.add_user(user_name, chosen_image)
+		calendar_script.user_name = user_name
+		SceneTransitions.change_scene("res://Scenes/calendar.tscn")
 
 func send_http_deepface_request(image: Image, function_name: String) -> void:
 	print('Sending request with image: ',image,' , function_name: ',function_name)
@@ -103,6 +110,8 @@ func _on_http_request_request_completed(result: int, response_code: int, headers
 	if response_code != 200:
 		printerr('HTTP Error ',response_code)
 		if response_code == 400:
+			%RichTextLabel.text = "[center]Seems like the photo wasn't good enough, let's try taking another one![/center]"
+			chosen_image = null
 			printerr('Probably couldnt detect a face, try a different pose or better lighting')
 		return
 	# Get the JSON response and parse it

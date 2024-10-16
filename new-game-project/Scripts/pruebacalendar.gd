@@ -2,6 +2,7 @@ extends Node
 class_name Calendar
 
 @export var min_day_size := Vector2(75,75)
+static var user_name: String
 var current_year: int
 var current_month: int
 var first_day_of_week: int
