@@ -3,13 +3,17 @@ class_name Calendar
 
 @export var min_day_size := Vector2(75,75)
 static var user_name: String
+static var current_user: int
 var current_year: int
 var current_month: int
 var first_day_of_week: int
 var last_day_of_week: int
 var current_day: int
 var day_of_the_week
-var emotions = ["fear", "happy", "disgust", "sad", "", "angry", "surprise", "happy", "fear", "", "sad", "disgust", "surprise", "angry", "sad", "surprise", "happy", "fear", "", "disgust", "angry", "happy", "surprise", "sad", "fear", "", "angry", "disgust", "happy", "surprise", "fear"]
+var database
+var emotions = []
+var last_week_day:int
+var last_day: int
 @export var emotion_dict: Dictionary = {
 	"sad": Color("4ba1ee"),
 	"happy": Color("ebe195"),
@@ -24,7 +28,9 @@ var months = ["January", "February", "March", "April", "May", "June", "July", "A
 func _ready():
 	var current_date = Time.get_datetime_dict_from_system()
 	print(current_date)
-
+	#self.database = SQLite.new()
+	#self.database.path("res://data.db")
+	#self.database.open_db()
 	current_year = current_date.year
 	for child in %GridContainer.get_children():
 		if child is PanelContainer:
@@ -35,24 +41,7 @@ func _ready():
 	self.day_of_the_week = current_date.weekday
 	#var month_label = get_node("month")
 	#var year_label = get_node("year")
-	draw_calendar(current_year, current_month, current_day, day_of_the_week, emotions)
-
-func clear_and_populate_calendar() -> void:
-	for child in %GridContainer.get_children():
-		%GridContainer.remove_child(child)
-		child.queue_free()
-	
-	for i in range(42):
-		var label := Label.new()
-		label.text = str(i)
-		var vbox := VBoxContainer.new()
-		vbox.add_child(label)
-		var panel_container = PanelContainer.new()
-		panel_container.add_child(vbox)
-		panel_container.set("theme_override_styles/panel", StyleBoxFlat.new())
-		panel_container.get("theme_override_styles/panel").bg_color = Color("ff0000ff")
-		%GridContainer.add_child(panel_container)
-	print(get_tree_string())
+	draw_calendar(current_year, current_month, current_day, day_of_the_week)
 
 # Función para obtener el valor de la emoción
 func get_emotion_value(emotion: String) -> Color:
@@ -74,9 +63,10 @@ func get_days_in_month(year: int, month: int) -> int:
 	
 # ... Código anterior ...
 
-func draw_calendar(year: int, month: int, day: int,  week_day: int, emotions: Array):
+func draw_calendar(year: int, month: int, day: int,  week_day: int):
 	%month_label.text = months[current_month - 1]
 	%year_label.text = str(current_year)
+	self.emotions = []
 	for child in %GridContainer.get_children():
 		if child is PanelContainer:
 			child.get("theme_override_styles/panel").bg_color = Color("ffff0000")
@@ -85,7 +75,7 @@ func draw_calendar(year: int, month: int, day: int,  week_day: int, emotions: Ar
 					if c is Label:
 						c.text = ""
 	var days_in_month = get_days_in_month(year, month)
-	
+	self.emotions = fill_emotions_month(days_in_month)
 	var starting_day = day  # Suponiendo que sabes que el día 14 es lunes
 	var first_day = 1 - day   # 1 = 1er día del mes
 	var first_day_weekday = (week_day - 1 + first_day) % 7
@@ -114,8 +104,6 @@ func draw_calendar(year: int, month: int, day: int,  week_day: int, emotions: Ar
 	self.last_day_of_week = rect_number -1
 # ... Resto del código ...
 
-var last_week_day: int
-var last_day: int
 func _on_previus_button_down() -> void:
 	if (self.first_day_of_week == 1):
 		self.last_week_day = 7
@@ -128,12 +116,12 @@ func _on_previus_button_down() -> void:
 		self.current_year -= 1
 		self.current_month = 12
 		self.day_of_the_week = self.last_week_day
-		draw_calendar(self.current_year, self.current_month, self.current_day, self.last_week_day, self.emotions)
+		draw_calendar(self.current_year, self.current_month, self.current_day, self.last_week_day)
 	else:
 		self.current_day = get_days_in_month(self.current_year, self.current_month -1) 
 		self.current_month -= 1
 		self.day_of_the_week = self.last_week_day
-		draw_calendar(self.current_year, self.current_month, self.current_day, self.last_week_day, self.emotions)
+		draw_calendar(self.current_year, self.current_month, self.current_day, self.last_week_day)
 
 func _on_next_button_down() -> void:
 	print(self.last_day_of_week)
@@ -148,9 +136,23 @@ func _on_next_button_down() -> void:
 		self.current_year += 1
 		self.current_month = 1
 		self.day_of_the_week = self.last_week_day
-		draw_calendar(self.current_year, self.current_month, self.current_day, self.last_week_day, self.emotions)
+		draw_calendar(self.current_year, self.current_month, self.current_day, self.last_week_day)
 	else:
 		self.current_day = 1
 		self.current_month += 1
 		self.day_of_the_week = self.last_week_day
-		draw_calendar(self.current_year, self.current_month, self.current_day, self.last_week_day, self.emotions)
+		draw_calendar(self.current_year, self.current_month, self.current_day, self.last_week_day)
+
+func fill_emotions_month(last_day:int) -> Array:
+	var emotions_array = []
+	var day_count = 1
+	while day_count <= last_day:
+		var where_clause = "user_id = '%s' AND day = %d AND month = %d AND year = %d" % [self.current_user, day_count, self.current_month, self.current_year]
+		var result = SqlDatabase.database.select_rows("day_emotions", where_clause, ["*"])
+		print(result)
+		if result.size() == 0:
+			emotions_array.append("")
+		else:
+			emotions_array.append(result[0]["emotion"])
+		day_count +=1
+	return emotions_array

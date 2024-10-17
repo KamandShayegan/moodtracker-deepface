@@ -1,7 +1,7 @@
 extends Node
 
-var calendar_script := preload("res://Scripts/pruebacalendar.gd")
-static var user_name: String = 'Unai'
+var calendar_script = preload("res://Scripts/pruebacalendar.gd")
+static var user_name: String = ''
 static var first_time: bool = false
 var server: UDPServer
 var chosen_image: Image
@@ -15,6 +15,10 @@ signal response_recieved
 func _ready() -> void:
 	server = UDPServer.new()
 	server.listen(4242)
+	var regex = RegEx.new()
+	regex.compile("[a-z]+")
+	user_name = regex.search(user_name.to_lower()).get_string()
+	user_name.capitalize()
 	if first_time:
 		%RichTextLabel.text = '[center]Hi [color=#d355b6]'+user_name+'[/color]! Lets take a [color=#d355b6]photo[/color]![/center]'
 	else:
@@ -69,16 +73,24 @@ func _on_next_button_up() -> void:
 	for user: Dictionary in users:
 		var image := Image.new()
 		image.load_jpg_from_buffer(Marshalls.base64_to_raw((user['picture'])))
+		%Image.texture = ImageTexture.create_from_image(chosen_image)
 		send_verify_request(chosen_image, image)
 		await Signal(self, 'response_recieved')
 		existing_face = http_response['verified']
+		print(http_response)
 		if existing_face and first_time:
 			%RichTextLabel.text = '[center]You are already in the [color=#d355b6]database[/color]![/center]'
 		elif existing_face:
 			calendar_script.user_name = user["name"]
+			var current_user_id = SqlDatabase.get_user_id(user_name)
+			calendar_script.current_user = current_user_id
+			calendar_script.user_name = user_name
 			SceneTransitions.change_scene("res://Scenes/calendar.tscn")
+			
 	if !existing_face and first_time:
 		SqlDatabase.add_user(user_name, chosen_image)
+		var current_user_id = SqlDatabase.get_user_id(user_name)
+		calendar_script.current_user = current_user_id
 		calendar_script.user_name = user_name
 		SceneTransitions.change_scene("res://Scenes/calendar.tscn")
 
@@ -99,9 +111,10 @@ func send_verify_request(image1: Image, image2: Image) -> void:
 	var body = JSON.new().stringify({
 		"img1_path": str('data:image/jpeg;base64,',base_64_data1),
 		"img2_path": str('data:image/jpeg;base64,',base_64_data2),
-		"model_name": "Facenet",
+		"model_name": "Facenet512",
 		"detector_backend": "opencv",
-		"distance_metric": "euclidean"
+		"distance_metric": "euclidean",
+		"enforce_detection": "false"
 		})
 	var headers: PackedStringArray = ['Content-type:application/json']
 	%HTTPRequest.request(url+'verify', headers, HTTPClient.METHOD_POST, body)
@@ -118,9 +131,9 @@ func _on_http_request_request_completed(result: int, response_code: int, headers
 	var json = JSON.new()
 	json.parse(body.get_string_from_utf8())
 	var response = json.get_data()
-
 	# Sort the emotions by percentage and set them to their respective progress bars
-	if response['verified']:
+	print(response)
+	if response.has('verified'):
 		http_response = response
 		response_recieved.emit()
 	elif response['results'][0]['emotion']:
