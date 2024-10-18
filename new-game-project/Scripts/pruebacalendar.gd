@@ -14,6 +14,7 @@ var database
 var emotions = []
 var last_week_day:int
 var last_day: int
+var overwrite_date = null
 @export var emotion_dict: Dictionary = {
 	"sad": Color("4ba1ee"),
 	"happy": Color("ebe195"),
@@ -27,10 +28,10 @@ var months = ["January", "February", "March", "April", "May", "June", "July", "A
 
 func _ready():
 	var current_date = Time.get_datetime_dict_from_system()
-	print(current_date)
 	#self.database = SQLite.new()
 	#self.database.path("res://data.db")
 	#self.database.open_db()
+	%RichTextLabel.text = "[center]Hello [color=#d355b6]"+user_name.capitalize()+"[/color]![/center]"
 	current_year = current_date.year
 	for child in %GridContainer.get_children():
 		if child is PanelContainer:
@@ -41,7 +42,14 @@ func _ready():
 	self.day_of_the_week = current_date.weekday
 	#var month_label = get_node("month")
 	#var year_label = get_node("year")
+	%TakePicture.save_day.connect(Callable(self,'save_mood'))
 	draw_calendar(current_year, current_month, current_day, day_of_the_week)
+
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("exit"):
+		%TakePicture.visible = false
+		var tween = create_tween()
+		tween.tween_property(%VBoxContainer,'modulate',Color('ffffffff'),0.3)
 
 # Función para obtener el valor de la emoción
 func get_emotion_value(emotion: String) -> Color:
@@ -66,6 +74,15 @@ func get_days_in_month(year: int, month: int) -> int:
 func draw_calendar(year: int, month: int, day: int,  week_day: int):
 	%month_label.text = months[current_month - 1]
 	%year_label.text = str(current_year)
+	if current_month == 12:
+		%previus.text = months[10]
+		%next.text = months[0]
+	elif current_month == 1:
+		%previus.text = months[11]
+		%next.text = months[1]
+	else:
+		%previus.text = months[current_month -2]
+		%next.text = months[current_month]
 	self.emotions = []
 	for child in %GridContainer.get_children():
 		if child is PanelContainer:
@@ -149,10 +166,33 @@ func fill_emotions_month(last_day:int) -> Array:
 	while day_count <= last_day:
 		var where_clause = "user_id = '%s' AND day = %d AND month = %d AND year = %d" % [self.current_user, day_count, self.current_month, self.current_year]
 		var result = SqlDatabase.database.select_rows("day_emotions", where_clause, ["*"])
-		print(result)
+		#print('Result: ',result)
 		if result.size() == 0:
 			emotions_array.append("")
 		else:
 			emotions_array.append(result[0]["emotion"])
 		day_count +=1
 	return emotions_array
+
+
+func _on_take_picture_button_down() -> void:
+	var tween = create_tween()
+	tween.tween_property(%VBoxContainer,'modulate',Color('ffffff35'),0.3)
+	%TakePicture.visible = true
+
+func save_mood(image: Image, emotion: String) -> void:
+	print('SIGNAL RECIEVED')
+	var base_64_data = Marshalls.raw_to_base64(image.save_jpg_to_buffer())
+	var new_row: Dictionary = {
+		'user_id': current_user,
+		'emotion': emotion,
+		'day': current_day,
+		'month': current_month,
+		'year': current_year,
+		'picture': base_64_data
+	}
+	SqlDatabase.database.insert_row("day_emotions", new_row)
+	draw_calendar(current_day, current_month, current_year, day_of_the_week)
+	var tween = create_tween()
+	tween.tween_property(%VBoxContainer,'modulate',Color('ffffffff'),0.3)
+	%TakePicture.visible = false

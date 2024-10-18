@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://cl6r1qalcou0u"]
+[gd_scene load_steps=6 format=3 uid="uid://cl6r1qalcou0u"]
 
 [ext_resource type="Script" path="res://Scripts/fill_name.gd" id="1_d8quc"]
 [ext_resource type="FontFile" uid="uid://4thlyosuh7vl" path="res://Assets/Fonts/Poppins/Poppins-Medium.ttf" id="1_ps7tu"]
 [ext_resource type="FontFile" uid="uid://yphs355qgbfo" path="res://Assets/Fonts/Poppins/Poppins-Bold.ttf" id="1_pw0xg"]
+[ext_resource type="Theme" uid="uid://ccqsg2c5bhxyc" path="res://Resources/light_button.tres" id="3_0oypk"]
+[ext_resource type="Script" path="res://Scripts/back_to_main_button.gd" id="4_syv5w"]
 
 [node name="FillName" type="Control"]
 layout_mode = 3
@@ -47,19 +49,34 @@ bbcode_enabled = true
 text = "[center]What's your  [color=#d355b6]name[/color]?[/center]
 "
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 50
-theme_override_constants/margin_right = 50
+size_flags_horizontal = 4
 
-[node name="TextEdit" type="TextEdit" parent="VBoxContainer/MarginContainer"]
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("3_0oypk")
+theme_override_colors/font_hover_color = Color(0.976471, 0.839216, 0.933333, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_pw0xg")
+text = "<-"
+script = ExtResource("4_syv5w")
+previous_scene_path = "res://Scenes/on_boarding.tscn"
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="TextEdit" type="TextEdit" parent="VBoxContainer/HBoxContainer/MarginContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 35)
 layout_mode = 2
 theme_override_colors/background_color = Color(0.976471, 0.839216, 0.933333, 1)
-theme_override_colors/font_placeholder_color = Color(0.377919, 0.377919, 0.377919, 1)
+theme_override_colors/font_placeholder_color = Color(1, 1, 1, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_ps7tu")
 placeholder_text = "Type your name here"
 
-[connection signal="text_changed" from="VBoxContainer/MarginContainer/TextEdit" to="." method="_on_text_edit_text_changed"]
+[connection signal="button_up" from="VBoxContainer/HBoxContainer/Button" to="VBoxContainer/HBoxContainer/Button" method="_on_button_up"]
+[connection signal="text_changed" from="VBoxContainer/HBoxContainer/MarginContainer/TextEdit" to="." method="_on_text_edit_text_changed"]

@@ -15,13 +15,16 @@ signal response_recieved
 func _ready() -> void:
 	server = UDPServer.new()
 	server.listen(4242)
-	var regex = RegEx.new()
-	regex.compile("[a-z]+")
-	user_name = regex.search(user_name.to_lower()).get_string()
-	user_name.capitalize()
 	if first_time:
+		var regex = RegEx.new()
+		regex.compile("[a-z]+")
+		user_name = regex.search(user_name.to_lower()).get_string()
+		user_name.capitalize()
+	if first_time:
+		%BackButton.previous_scene_path = "res://Scenes/fill_name.tscn"
 		%RichTextLabel.text = '[center]Hi [color=#d355b6]'+user_name+'[/color]! Lets take a [color=#d355b6]photo[/color]![/center]'
 	else:
+		%BackButton.previous_scene_path = "res://Scenes/on_boarding.tscn"
 		%RichTextLabel.text = "[center]Let's [color=#d355b6]identify[/color] you shall we?[/center]"
 
 func _process(_delta: float) -> void:
@@ -68,6 +71,7 @@ func _on_button_button_up() -> void:
 func _on_next_button_up() -> void:
 	var existing_face = false
 	var users: Array = SqlDatabase.get_users()
+	var min_distance_user: Array = []
 	%RichTextLabel.text = "[center]We're checking the [color=#d355b6]database[/color][/center]"
 	
 	for user: Dictionary in users:
@@ -78,21 +82,27 @@ func _on_next_button_up() -> void:
 		await Signal(self, 'response_recieved')
 		existing_face = http_response['verified']
 		print(http_response)
-		if existing_face and first_time:
-			%RichTextLabel.text = '[center]You are already in the [color=#d355b6]database[/color]![/center]'
-		elif existing_face:
-			calendar_script.user_name = user["name"]
-			var current_user_id = SqlDatabase.get_user_id(user_name)
-			calendar_script.current_user = current_user_id
-			calendar_script.user_name = user_name
-			SceneTransitions.change_scene("res://Scenes/calendar.tscn")
-			
-	if !existing_face and first_time:
+		if existing_face:
+			if !min_distance_user:
+				min_distance_user.append(http_response['distance'])
+				min_distance_user.append(user['name'])
+			elif min_distance_user[0] > http_response['distance']:
+				min_distance_user[0] = http_response['distance']
+				min_distance_user[1] = user['name']
+	if min_distance_user != [] and first_time:
+		%RichTextLabel.text = '[center]You are already in the [color=#d355b6]database[/color]![/center]'
+	elif min_distance_user != []:
+		calendar_script.user_name = min_distance_user[1]
+		var current_user_id = SqlDatabase.get_user_id(min_distance_user[1])
+		calendar_script.current_user = current_user_id
+		SceneTransitions.change_scene("res://Scenes/calendar.tscn")
+	elif min_distance_user == [] and first_time:
 		SqlDatabase.add_user(user_name, chosen_image)
 		var current_user_id = SqlDatabase.get_user_id(user_name)
 		calendar_script.current_user = current_user_id
 		calendar_script.user_name = user_name
 		SceneTransitions.change_scene("res://Scenes/calendar.tscn")
+
 
 func send_http_deepface_request(image: Image, function_name: String) -> void:
 	print('Sending request with image: ',image,' , function_name: ',function_name)
@@ -133,6 +143,11 @@ func _on_http_request_request_completed(result: int, response_code: int, headers
 	var response = json.get_data()
 	# Sort the emotions by percentage and set them to their respective progress bars
 	print(response)
+	if response == null:
+		%RichTextLabel.text = "[center]Seems like the photo wasn't good enough, let's try taking another one![/center]"
+		chosen_image = null
+		printerr('Probably couldnt detect a face, try a different pose or better lighting')
+		return
 	if response.has('verified'):
 		http_response = response
 		response_recieved.emit()

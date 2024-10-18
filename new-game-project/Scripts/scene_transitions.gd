@@ -1,6 +1,7 @@
 extends Control
 
 var ongoing_transition: String
+var previous_scene: String
 
 func change_scene(new_scene: String) -> void:
 	print('Chaging scene')

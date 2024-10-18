@@ -1,8 +1,10 @@
-[gd_scene load_steps=46 format=3 uid="uid://kxgahnnjc175"]
+[gd_scene load_steps=48 format=3 uid="uid://kxgahnnjc175"]
 
 [ext_resource type="Script" path="res://Scripts/pruebacalendar.gd" id="1_y81yw"]
 [ext_resource type="FontFile" uid="uid://yphs355qgbfo" path="res://Assets/Fonts/Poppins/Poppins-Bold.ttf" id="2_075ln"]
 [ext_resource type="Theme" uid="uid://jnx23qrh61nf" path="res://Resources/button_theme.tres" id="3_0ntko"]
+[ext_resource type="Script" path="res://Scripts/back_to_main_button.gd" id="4_lvleu"]
+[ext_resource type="PackedScene" uid="uid://lx54hc3a7w3o" path="res://Scenes/main.tscn" id="5_u2ylh"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6i2e8"]
 bg_color = Color(0.138149, 0.652463, 0.6428, 0.85098)
@@ -168,19 +170,55 @@ offset_bottom = 40.0
 grow_horizontal = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -239.5
-offset_top = -253.5
-offset_right = 239.5
-offset_bottom = 253.5
+offset_left = -265.0
+offset_top = -293.5
+offset_right = 265.0
+offset_bottom = 293.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 20
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(500, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_075ln")
+theme_override_font_sizes/normal_font_size = 25
+bbcode_enabled = true
+text = "[center]Hello  [color=#d355b6]x[/color]![/center]
+"
+
+[node name="Button" type="Button" parent="VBoxContainer/RichTextLabel"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -15.5
+offset_bottom = 15.5
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+theme = ExtResource("3_0ntko")
+theme_override_colors/font_hover_color = Color(0.976471, 0.839216, 0.933333, 1)
+theme_override_colors/font_color = Color(0.827451, 0.333333, 0.713726, 1)
+theme_override_fonts/font = ExtResource("2_075ln")
+text = "Log out"
+script = ExtResource("4_lvleu")
+previous_scene_path = "res://Scenes/on_boarding.tscn"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -214,6 +252,7 @@ uppercase = true
 [node name="GridContainer" type="GridContainer" parent="VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 4
 columns = 7
 
 [node name="PanelContainer1" type="PanelContainer" parent="VBoxContainer/GridContainer"]
@@ -768,11 +807,12 @@ theme_override_constants/margin_top = 10
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 90
+theme_override_constants/separation = 20
 alignment = 1
 
 [node name="previus" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(160, 0)
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 theme = ExtResource("3_0ntko")
 theme_override_colors/font_focus_color = Color(0.827451, 0.333333, 0.713726, 1)
@@ -780,8 +820,19 @@ theme_override_colors/font_color = Color(0.827451, 0.333333, 0.713726, 1)
 theme_override_fonts/font = ExtResource("2_075ln")
 text = "Previus month"
 
+[node name="take_picture" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(190, 0)
+layout_mode = 2
+theme = ExtResource("3_0ntko")
+theme_override_colors/font_focus_color = Color(0.827451, 0.333333, 0.713726, 1)
+theme_override_colors/font_color = Color(0.827451, 0.333333, 0.713726, 1)
+theme_override_fonts/font = ExtResource("2_075ln")
+text = "Save today's mood"
+
 [node name="next" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(160, 0)
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 theme = ExtResource("3_0ntko")
 theme_override_colors/font_focus_color = Color(0.827451, 0.333333, 0.713726, 1)
@@ -789,5 +840,12 @@ theme_override_colors/font_color = Color(0.827451, 0.333333, 0.713726, 1)
 theme_override_fonts/font = ExtResource("2_075ln")
 text = "Next  month"
 
+[node name="TakePicture" parent="." instance=ExtResource("5_u2ylh")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+
+[connection signal="button_up" from="VBoxContainer/RichTextLabel/Button" to="VBoxContainer/RichTextLabel/Button" method="_on_button_up"]
 [connection signal="button_down" from="VBoxContainer/MarginContainer/HBoxContainer2/previus" to="." method="_on_previus_button_down"]
+[connection signal="button_down" from="VBoxContainer/MarginContainer/HBoxContainer2/take_picture" to="." method="_on_take_picture_button_down"]
 [connection signal="button_down" from="VBoxContainer/MarginContainer/HBoxContainer2/next" to="." method="_on_next_button_down"]

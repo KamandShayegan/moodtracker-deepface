@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://bk2c50ncqbebg"]
+[gd_scene load_steps=7 format=3 uid="uid://bk2c50ncqbebg"]
 
 [ext_resource type="Script" path="res://Scripts/take_photo.gd" id="1_xp245"]
 [ext_resource type="FontFile" uid="uid://yphs355qgbfo" path="res://Assets/Fonts/Poppins/Poppins-Bold.ttf" id="2_0u4m8"]
 [ext_resource type="Texture2D" uid="uid://cj7d5bkqop1ey" path="res://Assets/Images/2024-10-12-220632.jpg" id="3_x2jic"]
 [ext_resource type="Theme" uid="uid://ccqsg2c5bhxyc" path="res://Resources/light_button.tres" id="4_3cdja"]
+[ext_resource type="PackedScene" uid="uid://iiwey68kgwv5" path="res://Scenes/back_to_main_button.tscn" id="5_3tyio"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bge45"]
 bg_color = Color(0.976471, 0.839216, 0.933333, 1)
@@ -105,6 +106,17 @@ theme_override_fonts/font = ExtResource("2_0u4m8")
 theme_override_font_sizes/font_size = 21
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="MarginContainer3" type="MarginContainer" parent="MarginContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="BackButton" parent="MarginContainer/VBoxContainer/PanelContainer/MarginContainer3" instance=ExtResource("5_3tyio")]
+unique_name_in_owner = true
+layout_mode = 2
 
 [node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer/PanelContainer"]
 layout_mode = 2
