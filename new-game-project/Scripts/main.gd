@@ -28,6 +28,8 @@ var using_webcam: bool = false
 var time: float = 0.0
 var chosen_image: Image
 var todays_copy: bool
+var recieved_image: Image
+var date: String
 
 
 func _ready() -> void:
@@ -50,12 +52,16 @@ func _process(delta: float) -> void:
 			if !%PhotoTimer.is_stopped():
 				chosen_image = image
 			%Image.texture = ImageTexture.create_from_image(image)
-	if !todays_copy:
-		%WebcamButton.visible = false
-		%TakePictureButton.visible = false
+	
+	%DateLabel.text = date
+	%WebcamButton.visible = todays_copy
+	%TakePictureButton.visible = todays_copy 
+	if recieved_image != null:
+		%Save.visible = false
+		%LoadImageButton.visible = false
 	else:
-		%WebcamButton.visible = true
-		%TakePictureButton.visible = true
+		%Save.visible = true
+		%LoadImageButton.visible = true
 	dominant_emotion_1.get("theme_override_styles/fill").bg_color = progress_bar_gradient.sample(dominant_emotion_1.value/100)
 	dominant_emotion_2.get("theme_override_styles/fill").bg_color = progress_bar_gradient.sample(dominant_emotion_2.value/100)
 	dominant_emotion_3.get("theme_override_styles/fill").bg_color = progress_bar_gradient.sample(dominant_emotion_3.value/100)
@@ -186,12 +192,17 @@ func _on_save_button_down() -> void:
 	save_day.emit(chosen_image, %EmotionLabel1.text)
 
 func update_camera_panel(visibility: bool) -> void:
-	visible = visibility
-	%Image.texture = Image.new()
 	%EmotionLabel1.text = ''
 	%EmotionLabel2.text = ''
 	%EmotionLabel3.text = ''
 	%DominantEmotion1.value = 0
 	%DominantEmotion2.value = 0
 	%DominantEmotion3.value = 0
-	
+	visible = visibility
+	if !visibility:
+		recieved_image = null
+	if recieved_image != null:
+		%Image.texture = ImageTexture.create_from_image(recieved_image)
+		send_http_deepface_request(recieved_image, api_functions[0])
+	else:
+		%Image.texture = null

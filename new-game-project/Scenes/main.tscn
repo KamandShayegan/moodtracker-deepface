@@ -192,6 +192,7 @@ theme_override_constants/v_separation = 9
 columns = 2
 
 [node name="LoadImageButton" type="Button" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("5_n4fyb")
 theme_override_fonts/font = ExtResource("2_j3cr5")
@@ -217,11 +218,18 @@ theme_override_fonts/font = ExtResource("2_j3cr5")
 text = "Take picture"
 
 [node name="Save" type="Button" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("5_n4fyb")
 theme_override_fonts/font = ExtResource("2_j3cr5")
 text = "Save"
+
+[node name="DateLabel" type="Label" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_j3cr5")
 
 [node name="PhotoTimer" type="Timer" parent="."]
 unique_name_in_owner = true

@@ -124,6 +124,7 @@ func draw_calendar(year: int, month: int, day: int,  week_day: int):
 				day_label.year = current_year
 				day_label.month = current_month
 				day_label.day = day_count
+				day_label.user_id = current_user
 				day_label.disabled = false
 				if current_year > actual_date.year:
 					day_label.disabled = true
@@ -197,12 +198,24 @@ func fill_emotions_month(last_day:int) -> Array:
 
 
 func _on_take_picture_button_down() -> void:
-	var tween = create_tween()
-	tween.tween_property(%VBoxContainer,'modulate',Color('ffffff35'),0.3)
-	self.today = true
-	%TakePicture.update_camera_panel(true)
+	var actual_date = Time.get_datetime_dict_from_system()
+	var where_clause = "user_id = '%s' AND day = '%s' AND month = '%s' AND year = '%s'" %[current_user, actual_date.day, actual_date.month, actual_date.year]
+	var result = SqlDatabase.database.select_rows("day_emotions", where_clause, ["*"])
+	print(result)
+	if result.size() == 0:
+		var tween = create_tween()
+		tween.tween_property(%VBoxContainer,'modulate',Color('ffffff35'),0.3)
+		self.today = true
+		%TakePicture.todays_copy = today
+		%TakePicture.update_camera_panel(true)
+		%TakePicture.date = ''
+	else:
+		var tween = create_tween()
+		tween.tween_property(%WarrniingLabel,'modulate',Color('ffffffff'),0.3)
+		tween.tween_interval(1)
+		tween.tween_property(%WarrniingLabel,'modulate',Color('ffffff00'), 0.6)
 	
-func day_button_pressed(year: int, month:int, day:int) -> void:
+func day_button_pressed(year: int, month:int, day:int, image: Image) -> void:
 	print("si")
 	var tween = create_tween()
 	tween.tween_property(%VBoxContainer,'modulate',Color('ffffff35'),0.3)
@@ -210,8 +223,12 @@ func day_button_pressed(year: int, month:int, day:int) -> void:
 	self.button_day= day
 	self.button_month = month
 	self.button_year = year
-	%TakePicture.update_camera_panel(true)
+	if image != null:
+		%TakePicture.recieved_image = image
+	%TakePicture.date = str(day,'/',month,'/',year)
 	%TakePicture.todays_copy = today
+	%TakePicture.update_camera_panel(true)
+	
 	
 	
 
