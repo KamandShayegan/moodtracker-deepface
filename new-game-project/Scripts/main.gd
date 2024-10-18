@@ -27,6 +27,7 @@ var server: UDPServer
 var using_webcam: bool = false
 var time: float = 0.0
 var chosen_image: Image
+var todays_copy: bool
 
 
 func _ready() -> void:
@@ -46,7 +47,12 @@ func _process(delta: float) -> void:
 			if !%PhotoTimer.is_stopped():
 				chosen_image = image
 			%Image.texture = ImageTexture.create_from_image(image)
-
+	if !todays_copy:
+		%WebcamButton.visible = false
+		%TakePictureButton.visible = false
+	else:
+		%WebcamButton.visible = true
+		%TakePictureButton.visible = true
 	dominant_emotion_1.get("theme_override_styles/fill").bg_color = progress_bar_gradient.sample(dominant_emotion_1.value/100)
 	dominant_emotion_2.get("theme_override_styles/fill").bg_color = progress_bar_gradient.sample(dominant_emotion_2.value/100)
 	dominant_emotion_3.get("theme_override_styles/fill").bg_color = progress_bar_gradient.sample(dominant_emotion_3.value/100)
@@ -69,6 +75,7 @@ func _on_file_dialog_file_selected(path: String) -> void:
 	#Setting the image texture
 	var image = Image.new()
 	image.load(path)
+	chosen_image = image
 
 	# Image resizing for quicker api calls
 	var resize_factor = min((512.0 / float(image.get_height())), 1)

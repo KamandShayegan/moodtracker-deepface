@@ -14,7 +14,10 @@ var database
 var emotions = []
 var last_week_day:int
 var last_day: int
-var overwrite_date = null
+var button_year: int
+var button_month: int
+var button_day:int
+var today:= false
 @export var emotion_dict: Dictionary = {
 	"sad": Color("4ba1ee"),
 	"happy": Color("ebe195"),
@@ -89,8 +92,9 @@ func draw_calendar(year: int, month: int, day: int,  week_day: int):
 			child.get("theme_override_styles/panel").bg_color = Color("ffff0000")
 			for ch in child.get_children():
 				for c in ch.get_children():
-					if c is Label:
+					if c is DayButton:
 						c.text = ""
+						c.disabled = true
 	var days_in_month = get_days_in_month(year, month)
 	self.emotions = fill_emotions_month(days_in_month)
 	var starting_day = day  # Suponiendo que sabes que el día 14 es lunes
@@ -114,6 +118,13 @@ func draw_calendar(year: int, month: int, day: int,  week_day: int):
 				color_panel.get("theme_override_styles/panel").bg_color = get_emotion_value(emotions[day_count - 1])
 				var node_name = "PanelContainer" + str(rect_number) + "/VBoxContainer42/Label"  
 				var day_label = %GridContainer.get_node(node_name)
+				#day_label.set_script("res://Scripts/day_button.gd")
+				day_label.year = current_year
+				day_label.month = current_month
+				day_label.day = day_count
+				day_label.disabled = false
+				day_label.connect('button_down', Callable(day_label,'recived_signal_down'))
+				day_label.day_selected.connect(Callable(self,'day_button_pressed'))
 				day_label.text = str(day_count) # Establece el texto del Label
 
 				day_count += 1  # Incrementar el contador de días
@@ -178,21 +189,49 @@ func fill_emotions_month(last_day:int) -> Array:
 func _on_take_picture_button_down() -> void:
 	var tween = create_tween()
 	tween.tween_property(%VBoxContainer,'modulate',Color('ffffff35'),0.3)
+	self.today = true
 	%TakePicture.visible = true
+	
+func day_button_pressed(year: int, month:int, day:int) -> void:
+	print("si")
+	var tween = create_tween()
+	tween.tween_property(%VBoxContainer,'modulate',Color('ffffff35'),0.3)
+	self.today = false
+	self.button_day= day
+	self.button_month = month
+	self.button_year = year
+	%TakePicture.visible = true
+	%TakePicture.todays_copy = today
+	
+	
 
+	
 func save_mood(image: Image, emotion: String) -> void:
 	print('SIGNAL RECIEVED')
 	var base_64_data = Marshalls.raw_to_base64(image.save_jpg_to_buffer())
+	var current_date = Time.get_datetime_dict_from_system()
+	var day_of = current_date.weekday
+	var year
+	var month
+	var day
+	if today: 
+		year = current_date.year
+		month = current_date.month
+		day = current_date.day
+	else:
+		year = button_year
+		month = button_month
+		day = button_day
 	var new_row: Dictionary = {
 		'user_id': current_user,
 		'emotion': emotion,
-		'day': current_day,
-		'month': current_month,
-		'year': current_year,
+		'day': day,
+		'month': month,
+		'year': year,
 		'picture': base_64_data
 	}
 	SqlDatabase.database.insert_row("day_emotions", new_row)
-	draw_calendar(current_day, current_month, current_year, day_of_the_week)
+	draw_calendar(self.current_year, self.current_month, self.current_day, self.last_week_day)
 	var tween = create_tween()
 	tween.tween_property(%VBoxContainer,'modulate',Color('ffffffff'),0.3)
 	%TakePicture.visible = false

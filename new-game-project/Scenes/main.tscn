@@ -201,6 +201,7 @@ text = "Load Image"
 unique_name_in_owner = true
 
 [node name="WebcamButton" type="Button" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("5_n4fyb")
@@ -208,6 +209,7 @@ theme_override_fonts/font = ExtResource("2_j3cr5")
 text = "Webcam"
 
 [node name="TakePictureButton" type="Button" parent="Panel/MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("5_n4fyb")

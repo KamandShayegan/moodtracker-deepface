@@ -69,6 +69,8 @@ func _on_button_button_up() -> void:
 
 
 func _on_next_button_up() -> void:
+	if !chosen_image:
+		return
 	var existing_face = false
 	var users: Array = SqlDatabase.get_users()
 	var min_distance_user: Array = []
