@@ -43,6 +43,7 @@ func _ready():
 	self.current_month = current_date.month
 	self.current_day = current_date.day
 	self.day_of_the_week = current_date.weekday
+	self.last_week_day = day_of_the_week
 	#var month_label = get_node("month")
 	#var year_label = get_node("year")
 	%TakePicture.save_day.connect(Callable(self,'save_mood'))
@@ -50,7 +51,7 @@ func _ready():
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("exit"):
-		%TakePicture.visible = false
+		%TakePicture.update_camera_panel(false)
 		var tween = create_tween()
 		tween.tween_property(%VBoxContainer,'modulate',Color('ffffffff'),0.3)
 
@@ -87,6 +88,7 @@ func draw_calendar(year: int, month: int, day: int,  week_day: int):
 		%previus.text = months[current_month -2]
 		%next.text = months[current_month]
 	self.emotions = []
+	var actual_date = Time.get_datetime_dict_from_system()
 	for child in %GridContainer.get_children():
 		if child is PanelContainer:
 			child.get("theme_override_styles/panel").bg_color = Color("ffff0000")
@@ -123,6 +125,14 @@ func draw_calendar(year: int, month: int, day: int,  week_day: int):
 				day_label.month = current_month
 				day_label.day = day_count
 				day_label.disabled = false
+				if current_year > actual_date.year:
+					day_label.disabled = true
+				elif current_year == actual_date.year:
+					if current_month > actual_date.month :
+						day_label.disabled = true
+					elif current_month == actual_date.month: 
+						if day_count > actual_date.day:
+							day_label.disabled = true
 				day_label.connect('button_down', Callable(day_label,'recived_signal_down'))
 				day_label.day_selected.connect(Callable(self,'day_button_pressed'))
 				day_label.text = str(day_count) # Establece el texto del Label
@@ -190,7 +200,7 @@ func _on_take_picture_button_down() -> void:
 	var tween = create_tween()
 	tween.tween_property(%VBoxContainer,'modulate',Color('ffffff35'),0.3)
 	self.today = true
-	%TakePicture.visible = true
+	%TakePicture.update_camera_panel(true)
 	
 func day_button_pressed(year: int, month:int, day:int) -> void:
 	print("si")
@@ -200,7 +210,7 @@ func day_button_pressed(year: int, month:int, day:int) -> void:
 	self.button_day= day
 	self.button_month = month
 	self.button_year = year
-	%TakePicture.visible = true
+	%TakePicture.update_camera_panel(true)
 	%TakePicture.todays_copy = today
 	
 	
@@ -234,4 +244,4 @@ func save_mood(image: Image, emotion: String) -> void:
 	draw_calendar(self.current_year, self.current_month, self.current_day, self.last_week_day)
 	var tween = create_tween()
 	tween.tween_property(%VBoxContainer,'modulate',Color('ffffffff'),0.3)
-	%TakePicture.visible = false
+	%TakePicture.update_camera_panel(false)

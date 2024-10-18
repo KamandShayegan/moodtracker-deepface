@@ -34,6 +34,9 @@ func _ready() -> void:
 	emotion_label_1.text = '?'
 	emotion_label_2.text = '?'
 	emotion_label_3.text = '?'
+	
+	%WebcamButton.visible = true
+	%TakePictureButton.visible = true
 
 # This function is called when each frame is drawn, useful for making anything move, in our case the progress bars
 func _process(delta: float) -> void:
@@ -181,3 +184,14 @@ func _on_save_button_down() -> void:
 		print('No image')
 		return
 	save_day.emit(chosen_image, %EmotionLabel1.text)
+
+func update_camera_panel(visibility: bool) -> void:
+	visible = visibility
+	%Image.texture = Image.new()
+	%EmotionLabel1.text = ''
+	%EmotionLabel2.text = ''
+	%EmotionLabel3.text = ''
+	%DominantEmotion1.value = 0
+	%DominantEmotion2.value = 0
+	%DominantEmotion3.value = 0
+	
