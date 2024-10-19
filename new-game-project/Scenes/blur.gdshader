@@ -3,9 +3,9 @@ shader_type canvas_item;
 uniform int strength: hint_range(1, 512) = 2;
 
 vec4 blur_size(sampler2D tex,vec2 fragCoord, vec2 pixelSize) {
-    
+
     vec4 color = vec4(0.,0.,0.,0.);
-    float strengthFloat = float(strength);	
+    float strengthFloat = float(strength);
 
     vec2 pixel = fragCoord/pixelSize;
     int x_min = max(int(pixel.x-strengthFloat), 0);
@@ -17,18 +17,18 @@ vec4 blur_size(sampler2D tex,vec2 fragCoord, vec2 pixelSize) {
 
     // Sum the pixels colors
     for(int x=x_min; x <= x_max; x++) {
-        for(int y = y_min; y <= y_max; y++) {           
+        for(int y = y_min; y <= y_max; y++) {
             color += texture(tex, vec2(float(x), float(y)) * pixelSize);
             count++;
         }
     }
-    
+
     // Divide the color by the number of colors you summed up
     color /= float(count);
-    
+
     return color;
 }
 
-void fragment() {	
+void fragment() {
     COLOR = blur_size(TEXTURE,UV,TEXTURE_PIXEL_SIZE);
 }
