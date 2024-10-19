@@ -82,8 +82,8 @@ func _on_next_button_up() -> void:
 		%Image.texture = ImageTexture.create_from_image(chosen_image)
 		send_verify_request(chosen_image, image)
 		await Signal(self, 'response_recieved')
-		existing_face = http_response['verified']
-		print(http_response)
+		print('Verify users responde: ',http_response)
+		existing_face = http_response['verified'] and http_response['distance'] < 25
 		if existing_face:
 			if !min_distance_user:
 				min_distance_user.append(http_response['distance'])

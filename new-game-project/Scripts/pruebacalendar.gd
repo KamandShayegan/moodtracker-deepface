@@ -228,11 +228,8 @@ func day_button_pressed(year: int, month:int, day:int, image: Image) -> void:
 	%TakePicture.date = str(day,'/',month,'/',year)
 	%TakePicture.todays_copy = today
 	%TakePicture.update_camera_panel(true)
-	
-	
-	
 
-	
+
 func save_mood(image: Image, emotion: String) -> void:
 	print('SIGNAL RECIEVED')
 	var base_64_data = Marshalls.raw_to_base64(image.save_jpg_to_buffer())
